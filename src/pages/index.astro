@@ -1,5 +1,6 @@
 ---
 // fullai.dev - Digital Backbone
+const currentYear = new Date().getFullYear();
 ---
 
 <!DOCTYPE html>
@@ -253,7 +254,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p data-en="&copy; 2024 fullai.dev. Building intelligent systems." data-es="&copy; 2024 fullai.dev. Construyendo sistemas inteligentes.">&copy; 2024 fullai.dev. Building intelligent systems.</p>
+                <p data-en={`© ${currentYear} fullai.dev. Building intelligent systems.`} data-es={`© ${currentYear} fullai.dev. Construyendo sistemas inteligentes.`}>© {currentYear} fullai.dev. Building intelligent systems.</p>
             </div>
         </div>
     </footer>
