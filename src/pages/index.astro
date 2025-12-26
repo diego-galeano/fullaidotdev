@@ -188,18 +188,29 @@ pipeline.<span class="code-function">transform</span>(your_business)
                     Let's discuss how AI can become the backbone of your digital infrastructure.
                 </p>
                 <div class="contact-methods">
-                    <a href="mailto:hello@fullai.dev" class="contact-card">
-                        <div class="contact-icon">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <path d="M4 4H20C21.1 4 22 4.9 22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6C2 4.9 2.9 4 4 4Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M22 6L12 13L2 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <div class="contact-card email-card">
+                        <a href="mailto:hello@fullai.dev" class="contact-card-link">
+                            <div class="contact-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M4 4H20C21.1 4 22 4.9 22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6C2 4.9 2.9 4 4 4Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M22 6L12 13L2 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <div class="contact-label" data-en="Email us" data-es="Escribinos">Email us</div>
+                                <div class="contact-value">hello@fullai.dev</div>
+                            </div>
+                        </a>
+                        <button class="copy-btn" id="copyEmailBtn" data-email="hello@fullai.dev" aria-label="Copy email">
+                            <svg class="copy-icon" width="18" height="18" viewBox="0 0 24 24" fill="none">
+                                <rect x="9" y="9" width="13" height="13" rx="2" stroke="currentColor" stroke-width="2"/>
+                                <path d="M5 15H4C2.9 15 2 14.1 2 13V4C2 2.9 2.9 2 4 2H13C14.1 2 15 2.9 15 4V5" stroke="currentColor" stroke-width="2"/>
                             </svg>
-                        </div>
-                        <div>
-                            <div class="contact-label" data-en="Email us" data-es="Escribinos">Email us</div>
-                            <div class="contact-value">hello@fullai.dev</div>
-                        </div>
-                    </a>
+                            <svg class="check-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" style="display: none;">
+                                <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                    </div>
                     <a href="https://cal.com/diego-galeano-yfvgal" target="_blank" rel="noopener noreferrer" class="contact-card">
                         <div class="contact-icon">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -918,6 +929,48 @@ pipeline.<span class="code-function">transform</span>(your_business)
             font-weight: 500;
         }
 
+        /* Email card with copy button */
+        .email-card {
+            position: relative;
+        }
+
+        .contact-card-link {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            text-decoration: none;
+            flex: 1;
+        }
+
+        .copy-btn {
+            position: absolute;
+            right: 1.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            padding: 0.6rem;
+            cursor: pointer;
+            color: var(--color-text-dim);
+            transition: all 0.3s var(--ease-smooth);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .copy-btn:hover {
+            border-color: var(--color-primary);
+            color: var(--color-primary);
+            background: rgba(0, 255, 163, 0.1);
+        }
+
+        .copy-btn.copied {
+            border-color: var(--color-primary);
+            color: var(--color-primary);
+            background: rgba(0, 255, 163, 0.2);
+        }
+
         /* Footer */
         .footer {
             background: var(--color-bg);
@@ -1150,6 +1203,37 @@ pipeline.<span class="code-function">transform</span>(your_business)
 
         // Apply stored language on page load
         applyLanguage(currentLanguage);
+
+        // Copy email functionality
+        const copyEmailBtn = document.getElementById('copyEmailBtn');
+        if (copyEmailBtn) {
+            copyEmailBtn.addEventListener('click', async (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+
+                const email = copyEmailBtn.dataset.email;
+                const copyIcon = copyEmailBtn.querySelector('.copy-icon');
+                const checkIcon = copyEmailBtn.querySelector('.check-icon');
+
+                try {
+                    await navigator.clipboard.writeText(email);
+
+                    // Show success state
+                    copyIcon.style.display = 'none';
+                    checkIcon.style.display = 'block';
+                    copyEmailBtn.classList.add('copied');
+
+                    // Reset after 2 seconds
+                    setTimeout(() => {
+                        copyIcon.style.display = 'block';
+                        checkIcon.style.display = 'none';
+                        copyEmailBtn.classList.remove('copied');
+                    }, 2000);
+                } catch (err) {
+                    console.error('Failed to copy email:', err);
+                }
+            });
+        }
     </script>
 </body>
 </html>
