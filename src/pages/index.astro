@@ -23,9 +23,13 @@
                 <span class="logo-text">fullai<span class="dot">.</span>dev</span>
             </div>
             <div class="nav-links">
-                <a href="#services">Services</a>
-                <a href="#approach">Approach</a>
-                <a href="#contact" class="nav-cta">Let's Talk</a>
+                <a href="#services" data-en="Services" data-es="Servicios">Services</a>
+                <a href="#approach" data-en="Approach" data-es="Enfoque">Approach</a>
+                <a href="#contact" class="nav-cta" data-en="Let's Talk" data-es="Hablemos">Let's Talk</a>
+                <button class="lang-switch" id="langSwitch" aria-label="Switch language">
+                    <span class="flag" id="currentFlag">🇺🇸</span>
+                    <span class="lang-code" id="currentLang">EN</span>
+                </button>
             </div>
         </div>
     </nav>
@@ -38,22 +42,23 @@
             <div class="gradient-orb orb-2"></div>
         </div>
         <div class="hero-content">
-            <div class="hero-badge">AI Strategy & Implementation</div>
+            <div class="hero-badge" data-en="AI Strategy & Implementation" data-es="Estrategia e Implementación de IA">AI Strategy & Implementation</div>
             <h1 class="hero-title">
-                <span class="title-line">Your</span>
-                <span class="title-line highlight">Digital Backbone</span>
+                <span class="title-line" data-en="Your" data-es="Tu">Your</span>
+                <span class="title-line highlight" data-en="Digital" data-es="Columna">Digital</span>
+                <span class="title-line highlight" data-en="Backbone" data-es="Digital">Backbone</span>
             </h1>
-            <p class="hero-description">
+            <p class="hero-description" data-en="We architect intelligent systems that don't just automate—they amplify. Building the neural infrastructure for enterprises ready to evolve." data-es="Arquitectamos sistemas inteligentes que no solo automatizan, sino que amplifican. Construyendo la infraestructura neuronal para empresas listas para evolucionar.">
                 We architect intelligent systems that don't just automate—they amplify.
                 Building the neural infrastructure for enterprises ready to evolve.
             </p>
             <div class="hero-ctas">
-                <a href="#contact" class="btn btn-primary">Start Building</a>
-                <a href="#approach" class="btn btn-secondary">Our Process</a>
+                <a href="#contact" class="btn btn-primary" data-en="Start Building" data-es="Empezar a Construir">Start Building</a>
+                <a href="#approach" class="btn btn-secondary" data-en="Our Process" data-es="Nuestro Proceso">Our Process</a>
             </div>
         </div>
         <div class="scroll-indicator">
-            <span>Scroll to explore</span>
+            <span data-en="Scroll to explore" data-es="Desplázate para explorar">Scroll to explore</span>
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                 <path d="M10 4V16M10 16L16 10M10 16L4 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
@@ -64,8 +69,8 @@
     <section id="services" class="services">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title">What We Build</h2>
-                <p class="section-subtitle">End-to-end AI solutions that integrate seamlessly into your operation</p>
+                <h2 class="section-title" data-en="What We Build" data-es="Lo Que Construimos">What We Build</h2>
+                <p class="section-subtitle" data-en="End-to-end AI solutions that integrate seamlessly into your operation" data-es="Soluciones de IA de principio a fin que se integran perfectamente en tu operación">End-to-end AI solutions that integrate seamlessly into your operation</p>
             </div>
 
             <div class="services-grid">
@@ -78,8 +83,8 @@
                             <path d="M20 4V12" stroke="currentColor" stroke-width="2"/>
                         </svg>
                     </div>
-                    <h3>AI Agents & RAG Systems</h3>
-                    <p>Intelligent agents and virtual assistants powered by LLMs with retrieval-augmented generation. Autonomous systems that reason, learn, and act on your data with precision.</p>
+                    <h3 data-en="AI Agents & RAG Systems" data-es="Agentes IA y Sistemas RAG">AI Agents & RAG Systems</h3>
+                    <p data-en="Intelligent agents and virtual assistants powered by LLMs with retrieval-augmented generation. Autonomous systems that reason, learn, and act on your data with precision." data-es="Agentes inteligentes y asistentes virtuales impulsados por LLMs con generación aumentada por recuperación. Sistemas autónomos que razonan, aprenden y actúan sobre tus datos con precisión.">Intelligent agents and virtual assistants powered by LLMs with retrieval-augmented generation. Autonomous systems that reason, learn, and act on your data with precision.</p>
                 </div>
 
                 <div class="service-card">
@@ -90,8 +95,8 @@
                             <path d="M10 28H16M22 26H24" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
                         </svg>
                     </div>
-                    <h3>Multiplatform Development</h3>
-                    <p>Build once, deploy everywhere. Native iOS, Android, and web apps from a single codebase using Expo and React Native with native performance.</p>
+                    <h3 data-en="Multiplatform Development" data-es="Desarrollo Multiplataforma">Multiplatform Development</h3>
+                    <p data-en="Build once, deploy everywhere. Native iOS, Android, and web apps from a single codebase using Expo and React Native with native performance." data-es="Construí una vez, desplegá en todos lados. Apps nativas para iOS, Android y web desde una única base de código usando Expo y React Native con rendimiento nativo.">Build once, deploy everywhere. Native iOS, Android, and web apps from a single codebase using Expo and React Native with native performance.</p>
                 </div>
 
                 <div class="service-card">
@@ -101,8 +106,8 @@
                             <path d="M16 8V16L20 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
                         </svg>
                     </div>
-                    <h3>Rapid Prototyping</h3>
-                    <p>Validate AI concepts quickly with production-ready prototypes. We build, test, and iterate to prove value before scaling.</p>
+                    <h3 data-en="Rapid Prototyping" data-es="Prototipado Rápido">Rapid Prototyping</h3>
+                    <p data-en="Validate AI concepts quickly with production-ready prototypes. We build, test, and iterate to prove value before scaling." data-es="Validá conceptos de IA rápidamente con prototipos listos para producción. Construimos, probamos e iteramos para demostrar valor antes de escalar.">Validate AI concepts quickly with production-ready prototypes. We build, test, and iterate to prove value before scaling.</p>
                 </div>
 
                 <div class="service-card">
@@ -114,8 +119,8 @@
                             <path d="M16 18V22M13 20H19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
                         </svg>
                     </div>
-                    <h3>Cloud Native & DevOps</h3>
-                    <p>Scalable cloud infrastructure with automated CI/CD pipelines. Container orchestration, microservices, and infrastructure-as-code for resilient deployments.</p>
+                    <h3 data-en="Cloud Native & DevOps" data-es="Cloud Native y DevOps">Cloud Native & DevOps</h3>
+                    <p data-en="Scalable cloud infrastructure with automated CI/CD pipelines. Container orchestration, microservices, and infrastructure-as-code for resilient deployments." data-es="Infraestructura cloud escalable con pipelines CI/CD automatizados. Orquestación de contenedores, microservicios e infraestructura como código para despliegues resilientes.">Scalable cloud infrastructure with automated CI/CD pipelines. Container orchestration, microservices, and infrastructure-as-code for resilient deployments.</p>
                 </div>
             </div>
         </div>
@@ -124,40 +129,39 @@
     <!-- Approach Section -->
     <section id="approach" class="approach">
         <div class="container">
-            <div class="approach-content">
-                <div class="approach-text">
-                    <h2 class="section-title">Build. Measure. Evolve.</h2>
-                    <p class="approach-description">
-                        We don't believe in AI for AI's sake. Every solution we build has measurable impact,
-                        clear ROI, and grows with your organization.
-                    </p>
-                    <div class="approach-stats">
-                        <div class="stat">
-                            <div class="stat-value">2-4 weeks</div>
-                            <div class="stat-label">To working prototype</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-value">100%</div>
-                            <div class="stat-label">Production-ready code</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-value">∞</div>
-                            <div class="stat-label">Scalability focus</div>
-                        </div>
-                    </div>
+            <div class="approach-header">
+                <h2 class="section-title" data-en="Build. Measure. Evolve." data-es="Construir. Medir. Evolucionar.">Build. Measure. Evolve.</h2>
+                <p class="approach-description" data-en="We don't believe in AI for AI's sake. Every solution we build has measurable impact, clear ROI, and grows with your organization." data-es="No creemos en la IA por la IA misma. Cada solución que construimos tiene impacto medible, ROI claro y crece con tu organización.">
+                    We don't believe in AI for AI's sake. Every solution we build has measurable impact,
+                    clear ROI, and grows with your organization.
+                </p>
+            </div>
+            <div class="approach-stats">
+                <div class="stat">
+                    <div class="stat-value" data-en="2-4 weeks" data-es="2-4 semanas">2-4 weeks</div>
+                    <div class="stat-label" data-en="To working prototype" data-es="Para prototipo funcional">To working prototype</div>
                 </div>
-                <div class="approach-visual">
-                    <div class="code-window">
-                        <div class="code-header">
-                            <div class="code-dots">
-                                <span></span>
-                                <span></span>
-                                <span></span>
-                            </div>
-                            <div class="code-title">ai_pipeline.py</div>
+                <div class="stat">
+                    <div class="stat-value">100%</div>
+                    <div class="stat-label" data-en="Production-ready code" data-es="Código listo para producción">Production-ready code</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">∞</div>
+                    <div class="stat-label" data-en="Scalability focus" data-es="Enfoque en escalabilidad">Scalability focus</div>
+                </div>
+            </div>
+            <div class="approach-visual">
+                <div class="code-window">
+                    <div class="code-header">
+                        <div class="code-dots">
+                            <span></span>
+                            <span></span>
+                            <span></span>
                         </div>
-                        <div class="code-content">
-                            <code>
+                        <div class="code-title">ai_pipeline.py</div>
+                    </div>
+                    <div class="code-content">
+                        <code>
 <span class="code-comment"># Your AI backbone starts here</span>
 <span class="code-keyword">from</span> fullai <span class="code-keyword">import</span> Pipeline
 
@@ -168,8 +172,7 @@
 )
 
 pipeline.<span class="code-function">transform</span>(your_business)
-                            </code>
-                        </div>
+                        </code>
                     </div>
                 </div>
             </div>
@@ -180,8 +183,8 @@ pipeline.<span class="code-function">transform</span>(your_business)
     <section id="contact" class="contact">
         <div class="container">
             <div class="contact-content">
-                <h2 class="section-title">Ready to Build?</h2>
-                <p class="contact-description">
+                <h2 class="section-title" data-en="Ready to Build?" data-es="¿Listo para Construir?">Ready to Build?</h2>
+                <p class="contact-description" data-en="Let's discuss how AI can become the backbone of your digital infrastructure." data-es="Hablemos de cómo la IA puede convertirse en la columna vertebral de tu infraestructura digital.">
                     Let's discuss how AI can become the backbone of your digital infrastructure.
                 </p>
                 <div class="contact-methods">
@@ -193,11 +196,11 @@ pipeline.<span class="code-function">transform</span>(your_business)
                             </svg>
                         </div>
                         <div>
-                            <div class="contact-label">Email us</div>
+                            <div class="contact-label" data-en="Email us" data-es="Escribinos">Email us</div>
                             <div class="contact-value">hello@fullai.dev</div>
                         </div>
                     </a>
-                    <a href="#schedule" class="contact-card">
+                    <a href="https://cal.com/diego-galeano-yfvgal" target="_blank" rel="noopener noreferrer" class="contact-card">
                         <div class="contact-icon">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
                                 <rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2"/>
@@ -205,8 +208,8 @@ pipeline.<span class="code-function">transform</span>(your_business)
                             </svg>
                         </div>
                         <div>
-                            <div class="contact-label">Schedule a call</div>
-                            <div class="contact-value">30-minute consultation</div>
+                            <div class="contact-label" data-en="Schedule a call" data-es="Agendá una llamada">Schedule a call</div>
+                            <div class="contact-value" data-en="30-minute consultation" data-es="Consulta de 30 minutos">30-minute consultation</div>
                         </div>
                     </a>
                 </div>
@@ -223,25 +226,25 @@ pipeline.<span class="code-function">transform</span>(your_business)
                         <img src="/icon-color.png" alt="fullai.dev" class="logo-img-small">
                         <span class="logo-text-small">fullai<span class="dot">.</span>dev</span>
                     </div>
-                    <p class="footer-tagline">Digital Backbone</p>
+                    <p class="footer-tagline" data-en="Digital Backbone" data-es="Columna Digital">Digital Backbone</p>
                 </div>
                 <div class="footer-links">
                     <div class="footer-column">
-                        <h4>Services</h4>
-                        <a href="#services">AI Strategy</a>
-                        <a href="#services">Development</a>
-                        <a href="#services">Integration</a>
+                        <h4 data-en="Services" data-es="Servicios">Services</h4>
+                        <a href="#services" data-en="AI Strategy" data-es="Estrategia IA">AI Strategy</a>
+                        <a href="#services" data-en="Development" data-es="Desarrollo">Development</a>
+                        <a href="#services" data-en="Integration" data-es="Integración">Integration</a>
                     </div>
                     <div class="footer-column">
-                        <h4>Company</h4>
-                        <a href="#approach">Approach</a>
-                        <a href="#contact">Contact</a>
-                        <a href="#">Careers</a>
+                        <h4 data-en="Company" data-es="Empresa">Company</h4>
+                        <a href="#approach" data-en="Approach" data-es="Enfoque">Approach</a>
+                        <a href="#contact" data-en="Contact" data-es="Contacto">Contact</a>
+                        <a href="#" data-en="Careers" data-es="Carreras">Careers</a>
                     </div>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2024 fullai.dev. Building intelligent systems.</p>
+                <p data-en="&copy; 2024 fullai.dev. Building intelligent systems." data-es="&copy; 2024 fullai.dev. Construyendo sistemas inteligentes.">&copy; 2024 fullai.dev. Building intelligent systems.</p>
             </div>
         </div>
     </footer>
@@ -359,35 +362,53 @@ pipeline.<span class="code-function">transform</span>(your_business)
             text-decoration: none;
             font-size: 0.9rem;
             font-weight: 400;
-            transition: color 0.3s var(--ease-smooth);
+            transition: all 0.4s var(--ease-smooth);
             position: relative;
+            padding: 0.5rem 0;
         }
 
         .nav-links a:hover {
             color: var(--color-primary);
+            text-shadow: 0 0 15px rgba(0, 255, 163, 0.4);
+            transform: translateY(-2px);
         }
 
         .nav-links a::after {
             content: '';
             position: absolute;
-            bottom: -4px;
-            left: 0;
+            bottom: 0;
+            left: 50%;
             width: 0;
             height: 2px;
-            background: var(--color-primary);
-            transition: width 0.3s var(--ease-smooth);
+            background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+            transition: all 0.4s var(--ease-smooth);
+            transform: translateX(-50%);
+            border-radius: 2px;
+            box-shadow: 0 0 10px rgba(0, 255, 163, 0);
         }
 
         .nav-links a:hover::after {
             width: 100%;
+            box-shadow: 0 0 10px rgba(0, 255, 163, 0.5);
         }
 
-        .nav-cta {
+        /* Smooth text transitions for language switching */
+        [data-en][data-es] {
+            transition: opacity 0.3s var(--ease-smooth);
+        }
+
+        .lang-switching [data-en][data-es] {
+            opacity: 0;
+        }
+
+        .nav-links a.nav-cta {
             background: var(--color-primary);
             color: var(--color-bg) !important;
-            padding: 0.5rem 1.25rem;
+            padding: 0.5rem 1.75rem !important;
             border-radius: 6px;
             font-weight: 500;
+            box-shadow: 0 0 20px rgba(0, 255, 163, 0);
+            transition: all 0.4s var(--ease-smooth);
         }
 
         .nav-cta::after {
@@ -395,8 +416,14 @@ pipeline.<span class="code-function">transform</span>(your_business)
         }
 
         .nav-cta:hover {
-            background: var(--color-primary-dim);
-            transform: translateY(-2px);
+            background: var(--color-primary);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 25px rgba(0, 255, 163, 0.4);
+        }
+
+        .nav-cta:active {
+            transform: translateY(-1px);
+            box-shadow: 0 2px 15px rgba(0, 255, 163, 0.3);
         }
 
         /* Hero Section */
@@ -468,7 +495,6 @@ pipeline.<span class="code-function">transform</span>(your_business)
             position: relative;
             z-index: 1;
             text-align: center;
-            max-width: 900px;
             padding: 0 2rem;
             animation: fadeInUp 1s var(--ease-smooth);
         }
@@ -702,24 +728,25 @@ pipeline.<span class="code-function">transform</span>(your_business)
             background: var(--color-bg);
         }
 
-        .approach-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
+        .approach-header {
+            text-align: center;
+            margin: 0 auto 4rem;
         }
 
         .approach-description {
             color: var(--color-text-dim);
             font-size: 1.15rem;
             line-height: 1.8;
-            margin-bottom: 3rem;
+            margin-top: 1.5rem;
+            margin-inline: auto;
+            max-width: 800px;
         }
 
         .approach-stats {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 2rem;
+            margin-bottom: 4rem;
         }
 
         .stat {
@@ -729,7 +756,7 @@ pipeline.<span class="code-function">transform</span>(your_business)
         .stat-value {
             font-family: var(--font-display);
             font-size: 3rem;
-            font-weight: 800;
+            font-weight: 700;
             color: var(--color-primary);
             margin-bottom: 0.5rem;
         }
@@ -739,17 +766,43 @@ pipeline.<span class="code-function">transform</span>(your_business)
             font-size: 0.9rem;
         }
 
+        .approach-visual {
+            max-width: 650px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .approach-visual::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-accent), var(--color-primary));
+            background-size: 200% 200%;
+            border-radius: 14px;
+            z-index: -1;
+            opacity: 0.5;
+            animation: gradientMove 3s ease infinite;
+            filter: blur(8px);
+        }
+
         .code-window {
             background: var(--color-surface-elevated);
             border: 1px solid var(--color-border);
             border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5);
+            transition: all 0.4s var(--ease-smooth);
+        }
+
+        .code-window:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 35px 100px rgba(0, 0, 0, 0.6),
+                        0 0 40px rgba(0, 255, 163, 0.1);
         }
 
         .code-header {
             background: var(--color-surface);
-            padding: 1rem;
+            padding: 1rem 1.25rem;
             display: flex;
             align-items: center;
             gap: 1rem;
@@ -766,6 +819,11 @@ pipeline.<span class="code-function">transform</span>(your_business)
             height: 12px;
             border-radius: 50%;
             background: var(--color-border);
+            transition: transform 0.3s var(--ease-smooth);
+        }
+
+        .code-window:hover .code-dots span {
+            transform: scale(1.1);
         }
 
         .code-dots span:nth-child(1) { background: #ff5f57; }
@@ -775,6 +833,9 @@ pipeline.<span class="code-function">transform</span>(your_business)
         .code-title {
             color: var(--color-text-dim);
             font-size: 0.9rem;
+            flex: 1;
+            text-align: center;
+            margin-right: 2.5rem;
         }
 
         .code-content {
@@ -783,6 +844,7 @@ pipeline.<span class="code-function">transform</span>(your_business)
             font-size: 0.95rem;
             line-height: 1.8;
             color: var(--color-text-dim);
+            background: linear-gradient(180deg, var(--color-surface-elevated) 0%, rgba(10, 14, 23, 0.8) 100%);
         }
 
         .code-comment { color: #6a737d; }
@@ -923,16 +985,13 @@ pipeline.<span class="code-function">transform</span>(your_business)
 
         /* Responsive */
         @media (max-width: 968px) {
-            .approach-content {
-                grid-template-columns: 1fr;
-            }
-
             .footer-content {
                 grid-template-columns: 1fr;
             }
 
             .approach-stats {
                 grid-template-columns: 1fr;
+                gap: 1.5rem;
             }
 
             .nav-links {
@@ -953,10 +1012,144 @@ pipeline.<span class="code-function">transform</span>(your_business)
                 grid-template-columns: 1fr;
             }
 
-            .nav-links a:not(.nav-cta) {
+            .nav-links a:not(.nav-cta):not(.lang-switch) {
                 display: none;
             }
         }
+
+        /* Language Switcher */
+        .lang-switch {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            background: var(--color-surface-elevated);
+            border: none;
+            border-radius: 50px;
+            padding: 0.5rem 1rem 0.5rem 0.6rem;
+            cursor: pointer;
+            transition: all 0.4s var(--ease-smooth);
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--color-text);
+            overflow: hidden;
+        }
+
+        .lang-switch::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+            background-size: 200% 200%;
+            opacity: 0;
+            transition: opacity 0.4s var(--ease-smooth);
+            animation: gradientMove 3s ease infinite;
+        }
+
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .lang-switch:hover::before {
+            opacity: 0.85;
+        }
+
+        .lang-switch:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 25px rgba(0, 255, 163, 0.5);
+        }
+
+        .lang-switch:active {
+            transform: scale(0.98);
+        }
+
+        .lang-switch .flag {
+            position: relative;
+            z-index: 1;
+            font-size: 1.3rem;
+            line-height: 1;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+            transition: transform 0.3s var(--ease-bounce);
+        }
+
+        .lang-switch:hover .flag {
+            transform: scale(1.15) rotate(-5deg);
+        }
+
+        .lang-switch .lang-code {
+            position: relative;
+            z-index: 1;
+            font-weight: 600;
+            font-size: 0.75rem;
+            letter-spacing: 0.05em;
+            color: var(--color-text-dim);
+            transition: all 0.3s var(--ease-smooth);
+        }
+
+        .lang-switch:hover .lang-code {
+            color: var(--color-bg);
+        }
     </style>
+
+    <script>
+        // Language switching functionality
+        const langSwitch = document.getElementById('langSwitch');
+        const currentFlag = document.getElementById('currentFlag');
+        const currentLang = document.getElementById('currentLang');
+
+        // Language configurations
+        const languages = {
+            en: { flag: '🇺🇸', code: 'EN', htmlLang: 'en' },
+            es: { flag: '🇦🇷', code: 'ES', htmlLang: 'es' }
+        };
+
+        // Get stored language or default to English
+        let currentLanguage = localStorage.getItem('lang') || 'en';
+
+        // Apply language on page load
+        function applyLanguage(lang) {
+            currentLanguage = lang;
+            localStorage.setItem('lang', lang);
+
+            // Update button display
+            currentFlag.textContent = languages[lang].flag;
+            currentLang.textContent = languages[lang].code;
+
+            // Update HTML lang attribute
+            document.documentElement.lang = languages[lang].htmlLang;
+
+            // Update all translatable elements
+            const elements = document.querySelectorAll('[data-en][data-es]');
+            elements.forEach(el => {
+                const text = el.getAttribute(`data-${lang}`);
+                if (text) {
+                    el.textContent = text;
+                }
+            });
+        }
+
+        // Toggle language on click with smooth transition
+        langSwitch.addEventListener('click', () => {
+            const newLang = currentLanguage === 'en' ? 'es' : 'en';
+
+            // Add transition class
+            document.body.classList.add('lang-switching');
+
+            // Wait for fade out, then switch language
+            setTimeout(() => {
+                applyLanguage(newLang);
+
+                // Remove transition class to fade back in
+                setTimeout(() => {
+                    document.body.classList.remove('lang-switching');
+                }, 50);
+            }, 300);
+        });
+
+        // Apply stored language on page load
+        applyLanguage(currentLanguage);
+    </script>
 </body>
 </html>
