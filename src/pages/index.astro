@@ -161,18 +161,16 @@
                         <div class="code-title">ai_pipeline.py</div>
                     </div>
                     <div class="code-content">
-                        <code>
-<span class="code-comment"># Your AI backbone starts here</span>
-<span class="code-keyword">from</span> fullai <span class="code-keyword">import</span> Pipeline
-
-<span class="code-function">pipeline</span> = Pipeline(
-    strategy=<span class="code-string">"custom"</span>,
-    scalable=<span class="code-boolean">True</span>,
-    production_ready=<span class="code-boolean">True</span>
-)
-
-pipeline.<span class="code-function">transform</span>(your_business)
-                        </code>
+                        <pre><code><span class="code-line"><span class="code-comment"># Your AI backbone starts here</span></span>
+<span class="code-line"><span class="code-keyword">from</span> fullai <span class="code-keyword">import</span> Pipeline</span>
+<span class="code-line"></span>
+<span class="code-line"><span class="code-function">pipeline</span> = Pipeline(</span>
+<span class="code-line">    strategy=<span class="code-string">"custom"</span>,</span>
+<span class="code-line">    scalable=<span class="code-boolean">True</span>,</span>
+<span class="code-line">    production_ready=<span class="code-boolean">True</span></span>
+<span class="code-line">)</span>
+<span class="code-line"></span>
+<span class="code-line">pipeline.<span class="code-function">transform</span>(your_business)</span></code></pre>
                     </div>
                 </div>
             </div>
@@ -237,7 +235,7 @@ pipeline.<span class="code-function">transform</span>(your_business)
                         <img src="/icon-color.png" alt="fullai.dev" class="logo-img-small">
                         <span class="logo-text-small">fullai<span class="dot">.</span>dev</span>
                     </div>
-                    <p class="footer-tagline" data-en="Digital Backbone" data-es="Columna Digital">Digital Backbone</p>
+                    <p class="footer-tagline" data-en="Intelligent Systems" data-es="Systemas Inteligentes">Intelligent Systems</p>
                 </div>
                 <div class="footer-links">
                     <div class="footer-column">
@@ -778,7 +776,7 @@ pipeline.<span class="code-function">transform</span>(your_business)
         }
 
         .approach-visual {
-            max-width: 650px;
+            max-width: 800px;
             margin: 0 auto;
             position: relative;
         }
@@ -850,12 +848,28 @@ pipeline.<span class="code-function">transform</span>(your_business)
         }
 
         .code-content {
-            padding: 2rem;
+            padding: 1rem 1.25rem;
             font-family: var(--font-mono);
-            font-size: 0.95rem;
-            line-height: 1.8;
+            font-size: 1.2rem;
+            line-height: 1.2;
             color: var(--color-text-dim);
             background: linear-gradient(180deg, var(--color-surface-elevated) 0%, rgba(10, 14, 23, 0.8) 100%);
+        }
+
+        .code-content pre {
+            margin: 0;
+            font-family: inherit;
+            font-size: inherit;
+            line-height: inherit;
+        }
+
+        .code-content code {
+            display: block;
+        }
+
+        .code-line {
+            display: block;
+            min-height: 1.2em;
         }
 
         .code-comment { color: #6a737d; }
