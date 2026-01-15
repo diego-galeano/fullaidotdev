@@ -43,7 +43,7 @@ const currentYear = new Date().getFullYear();
             <div class="gradient-orb orb-2"></div>
         </div>
         <div class="hero-content">
-            <div class="hero-badge" data-en="AI Strategy & Software Development" data-es="Desarrollo de Software basado en IA">AI Strategy & Software Development</div>
+            <div class="hero-badge" data-en="AI Strategy & Software Development" data-es="Estrategia + IA + Desarrollo de Software">AI Strategy & Software Development</div>
             <h1 class="hero-title">
                 <span class="title-line" data-en="Your" data-es="Tu">Your</span>
                 <span class="title-line highlight" data-en="Digital" data-es="Columna">Digital</span>
@@ -611,7 +611,7 @@ const currentYear = new Date().getFullYear();
 
         .scroll-indicator {
             position: absolute;
-            bottom: 2rem;
+            bottom: 4rem;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
@@ -1110,8 +1110,47 @@ const currentYear = new Date().getFullYear();
         }
 
         @media (max-width: 640px) {
+            .hero {
+                padding-top: 70px;
+                padding-bottom: 80px;
+            }
+
+            .hero-content {
+                padding: 0 1.25rem;
+            }
+
+            .hero-badge {
+                font-size: 0.75rem;
+                padding: 0.4rem 0.8rem;
+                margin-bottom: 1.5rem;
+            }
+
             .hero-title {
-                font-size: 3rem;
+                font-size: clamp(2.25rem, 10vw, 3rem);
+                margin-bottom: 1rem;
+            }
+
+            .hero-description {
+                font-size: 1rem;
+                margin-bottom: 2rem;
+                line-height: 1.7;
+            }
+
+            .hero-ctas {
+                flex-direction: column;
+                width: 100%;
+                padding: 0 1rem;
+            }
+
+            .hero-ctas .btn {
+                width: 100%;
+                text-align: center;
+                padding: 0.875rem 1.5rem;
+            }
+
+            .scroll-indicator {
+                bottom: 2.5rem;
+                font-size: 0.75rem;
             }
 
             .services-grid {
@@ -1123,6 +1162,50 @@ const currentYear = new Date().getFullYear();
             }
 
             .nav-links a:not(.lang-switch) {
+                display: none;
+            }
+
+            .nav-container {
+                padding: 1rem 1.25rem;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .hero-badge {
+                font-size: 0.7rem;
+            }
+
+            .hero-description {
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Landscape mobile - limited height */
+        @media (max-height: 500px) and (orientation: landscape) {
+            .hero {
+                min-height: auto;
+                padding: 100px 0 60px;
+            }
+
+            .hero-badge {
+                margin-bottom: 1rem;
+            }
+
+            .hero-title {
+                font-size: 2rem;
+                margin-bottom: 0.75rem;
+            }
+
+            .hero-description {
+                font-size: 0.9rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .scroll-indicator {
                 display: none;
             }
         }
@@ -1216,26 +1299,27 @@ const currentYear = new Date().getFullYear();
         };
 
         // Detect browser language
-        function detectBrowserLanguage() {
-            const browserLang = navigator.language || navigator.userLanguage;
+        function detectBrowserLanguage(): 'en' | 'es' {
+            const browserLang = navigator.language;
             // Check if browser language starts with 'es' (Spanish)
-            if (browserLang.startsWith('es')) {
+            if (browserLang && browserLang.startsWith('es')) {
                 return 'es';
             }
             return 'en';
         }
 
         // Get stored language, or detect from browser on first visit
-        let currentLanguage = localStorage.getItem('lang') || detectBrowserLanguage();
+        const storedLang = localStorage.getItem('lang');
+        let currentLanguage: 'en' | 'es' = (storedLang === 'en' || storedLang === 'es') ? storedLang : detectBrowserLanguage();
 
         // Apply language on page load
-        function applyLanguage(lang) {
+        function applyLanguage(lang: 'en' | 'es') {
             currentLanguage = lang;
             localStorage.setItem('lang', lang);
 
             // Update button display
-            currentFlag.textContent = languages[lang].flag;
-            currentLang.textContent = languages[lang].code;
+            if (currentFlag) currentFlag.textContent = languages[lang].flag;
+            if (currentLang) currentLang.textContent = languages[lang].code;
 
             // Update HTML lang attribute
             document.documentElement.lang = languages[lang].htmlLang;
@@ -1251,7 +1335,7 @@ const currentYear = new Date().getFullYear();
         }
 
         // Toggle language on click with smooth transition
-        langSwitch.addEventListener('click', () => {
+        langSwitch?.addEventListener('click', () => {
             const newLang = currentLanguage === 'en' ? 'es' : 'en';
 
             // Add transition class
@@ -1272,15 +1356,17 @@ const currentYear = new Date().getFullYear();
         applyLanguage(currentLanguage);
 
         // Copy email functionality
-        const copyEmailBtn = document.getElementById('copyEmailBtn');
+        const copyEmailBtn = document.getElementById('copyEmailBtn') as HTMLElement | null;
         if (copyEmailBtn) {
             copyEmailBtn.addEventListener('click', async (e) => {
                 e.preventDefault();
                 e.stopPropagation();
 
                 const email = copyEmailBtn.dataset.email;
-                const copyIcon = copyEmailBtn.querySelector('.copy-icon');
-                const checkIcon = copyEmailBtn.querySelector('.check-icon');
+                const copyIcon = copyEmailBtn.querySelector('.copy-icon') as HTMLElement | null;
+                const checkIcon = copyEmailBtn.querySelector('.check-icon') as HTMLElement | null;
+
+                if (!email || !copyIcon || !checkIcon) return;
 
                 try {
                     await navigator.clipboard.writeText(email);
