@@ -97,7 +97,7 @@ const currentYear = new Date().getFullYear();
                         </svg>
                     </div>
                     <h3 data-en="Multiplatform Apps" data-es="Apps Multiplataforma">Multiplatform Apps</h3>
-                    <p data-en="One codebase, every platform. Ship native iOS, Android, and web apps simultaneously. Reduce development time by 60% while delivering pixel-perfect experiences users love." data-es="Una base de código, todas las plataformas. Lanzá apps nativas para iOS, Android y web simultáneamente. Reducí el tiempo de desarrollo un 60% entregando experiencias perfectas que los usuarios aman.">One codebase, every platform. Ship native iOS, Android, and web apps simultaneously. Reduce development time by 60% while delivering pixel-perfect experiences users love.</p>
+                    <p data-en="Reach every user, everywhere. Launch on iOS, Android, and web with one development effort—cutting costs in half and getting to market twice as fast. One team, one product, maximum reach." data-es="Llegá a cada usuario, en todas partes. Lanzá en iOS, Android y web con un solo esfuerzo de desarrollo—reduciendo costos a la mitad y llegando al mercado el doble de rápido. Un equipo, un producto, máximo alcance.">Reach every user, everywhere. Launch on iOS, Android, and web with one development effort—cutting costs in half and getting to market twice as fast. One team, one product, maximum reach.</p>
                 </div>
 
                 <div class="service-card">
@@ -128,8 +128,13 @@ const currentYear = new Date().getFullYear();
 
     <!-- Approach Section -->
     <section id="approach" class="approach">
+        <div class="approach-background">
+            <div class="approach-grid"></div>
+            <div class="approach-glow"></div>
+        </div>
         <div class="container">
             <div class="approach-header">
+                <span class="approach-badge" data-en="Our Process" data-es="Nuestro Proceso">Our Process</span>
                 <h2 class="section-title" data-en="Build. Measure. Evolve." data-es="Construir. Medir. Evolucionar.">Build. Measure. Evolve.</h2>
                 <p class="approach-description" data-en="We start small, prove it works, then scale. You see results fast, pay for what matters, and get a product that grows with your business." data-es="Comenzamos de a poco, probamos que funciona, después escalamos. Ves resultados rápido, pagás por lo que importa y obtenés un producto que crece con tu negocio.">
                     We start small, prove it works, then scale. You see results fast, pay for what matters, and get a product that grows with your business.
@@ -137,14 +142,33 @@ const currentYear = new Date().getFullYear();
             </div>
             <div class="approach-stats">
                 <div class="stat">
+                    <div class="stat-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                            <path d="M12 6V12L16 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </div>
                     <div class="stat-value" data-en="2-4 weeks" data-es="2-4 semanas">2-4 weeks</div>
                     <div class="stat-label" data-en="To working prototype" data-es="Para prototipo funcional">To working prototype</div>
                 </div>
                 <div class="stat">
+                    <div class="stat-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M9 12L11 14L15 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+                    </div>
                     <div class="stat-value">100%</div>
                     <div class="stat-label" data-en="Production-ready code" data-es="Código listo para producción">Production-ready code</div>
                 </div>
                 <div class="stat">
+                    <div class="stat-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M4 14L8 10L12 14L20 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M20 6V12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            <path d="M20 6H14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </div>
                     <div class="stat-value">∞</div>
                     <div class="stat-label" data-en="Scalability focus" data-es="Enfoque en escalabilidad">Scalability focus</div>
                 </div>
@@ -733,12 +757,61 @@ const currentYear = new Date().getFullYear();
         /* Approach Section */
         .approach {
             padding: 8rem 0;
-            background: var(--color-bg);
+            background: var(--color-surface);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .approach-background {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+        }
+
+        .approach-grid {
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(0, 255, 163, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 163, 0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+            mask-image: radial-gradient(ellipse at center, black 0%, transparent 70%);
+            -webkit-mask-image: radial-gradient(ellipse at center, black 0%, transparent 70%);
+        }
+
+        .approach-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 800px;
+            height: 600px;
+            background: radial-gradient(ellipse, rgba(0, 255, 163, 0.08) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .approach .container {
+            position: relative;
+            z-index: 1;
         }
 
         .approach-header {
             text-align: center;
             margin: 0 auto 4rem;
+        }
+
+        .approach-badge {
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            background: rgba(0, 255, 163, 0.1);
+            border: 1px solid rgba(0, 255, 163, 0.3);
+            border-radius: 50px;
+            color: var(--color-primary);
+            font-size: 0.8rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1.5rem;
         }
 
         .approach-description {
@@ -755,18 +828,57 @@ const currentYear = new Date().getFullYear();
             grid-template-columns: repeat(3, 1fr);
             gap: 2rem;
             margin-bottom: 4rem;
+            margin-inline: auto;
         }
 
         .stat {
             text-align: center;
+            background: rgba(20, 24, 33, 0.6);
+            border: 1px solid var(--color-border);
+            border-radius: 16px;
+            padding: 2rem 1.5rem;
+            transition: all 0.4s var(--ease-smooth);
+            backdrop-filter: blur(10px);
+            min-width: 350px;
+        }
+
+        .stat:hover {
+            transform: translateY(-5px);
+            border-color: rgba(0, 255, 163, 0.3);
+            background: rgba(20, 24, 33, 0.8);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3),
+                        0 0 30px rgba(0, 255, 163, 0.05);
+        }
+
+        .stat-icon {
+            width: 48px;
+            height: 48px;
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 255, 163, 0.1);
+            border-radius: 12px;
+            color: var(--color-primary);
+            transition: all 0.4s var(--ease-smooth);
+        }
+
+        .stat:hover .stat-icon {
+            background: var(--color-primary);
+            color: var(--color-bg);
+            transform: scale(1.1);
         }
 
         .stat-value {
             font-family: var(--font-display);
-            font-size: 3rem;
+            font-size: 2.5rem;
             font-weight: 700;
-            color: var(--color-primary);
+            color: var(--color-text);
             margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, var(--color-text) 0%, var(--color-primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .stat-label {
@@ -1104,6 +1216,19 @@ const currentYear = new Date().getFullYear();
                 gap: 1.5rem;
             }
 
+            .stat {
+                padding: 1.5rem 1rem;
+            }
+
+            .stat-value {
+                font-size: 2rem;
+            }
+
+            .approach-glow {
+                width: 100%;
+                height: 400px;
+            }
+
             .nav-links {
                 gap: 1rem;
             }
@@ -1167,6 +1292,28 @@ const currentYear = new Date().getFullYear();
 
             .nav-container {
                 padding: 1rem 1.25rem;
+            }
+
+            .approach {
+                padding: 5rem 0;
+            }
+
+            .approach-badge {
+                font-size: 0.7rem;
+                padding: 0.35rem 0.8rem;
+            }
+
+            .approach-header {
+                margin-bottom: 3rem;
+            }
+
+            .approach-description {
+                font-size: 1rem;
+            }
+
+            .stat-icon {
+                width: 40px;
+                height: 40px;
             }
         }
 
