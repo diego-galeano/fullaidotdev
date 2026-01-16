@@ -1,0 +1,12 @@
+# robots.txt for fullai.dev
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://fullai.dev/sitemap.xml
+
+# Block common bot traps
+User-agent: *
+Disallow: /api/
+Disallow: /_astro/

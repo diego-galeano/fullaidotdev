@@ -1,6 +1,14 @@
 ---
 // fullai.dev - Digital Backbone
 const currentYear = new Date().getFullYear();
+
+// SEO Configuration
+const siteUrl = "https://fullai.dev";
+const siteName = "fullai.dev";
+const siteTitle = "fullai.dev - AI Strategy & Software Development";
+const siteDescription = "Transform your business with AI-powered apps, RAG systems, and multiplatform solutions. We build custom AI agents, rapid prototypes, and serverless cloud infrastructure. Get from idea to production in weeks.";
+const siteImage = `${siteUrl}/og-image.png`;
+const twitterHandle = "@fullaidev";
 ---
 
 <!DOCTYPE html>
@@ -8,12 +16,85 @@ const currentYear = new Date().getFullYear();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>fullai.dev - Digital Backbone</title>
-    <meta name="description" content="AI consulting that builds the digital backbone of tomorrow's enterprises">
+
+    <!-- Primary Meta Tags -->
+    <title>{siteTitle}</title>
+    <meta name="title" content={siteTitle}>
+    <meta name="description" content={siteDescription}>
+    <meta name="keywords" content="AI consulting, AI development, RAG systems, AI agents, LLM, multiplatform apps, cross-platform development, serverless cloud, rapid prototyping, software development, artificial intelligence">
+    <meta name="author" content="fullai.dev">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href={siteUrl}>
+
+    <!-- Favicon -->
     <link rel="icon" type="image/png" href="/icon-color.png">
+    <link rel="apple-touch-icon" href="/icon-color.png">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content={siteUrl}>
+    <meta property="og:title" content={siteTitle}>
+    <meta property="og:description" content={siteDescription}>
+    <meta property="og:image" content={siteImage}>
+    <meta property="og:site_name" content={siteName}>
+    <meta property="og:locale" content="en_US">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content={siteUrl}>
+    <meta name="twitter:title" content={siteTitle}>
+    <meta name="twitter:description" content={siteDescription}>
+    <meta name="twitter:image" content={siteImage}>
+    <meta name="twitter:site" content={twitterHandle}>
+
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "Organization",
+                "@id": "https://fullai.dev/#organization",
+                "name": "fullai.dev",
+                "url": "https://fullai.dev",
+                "logo": {
+                    "@type": "ImageObject",
+                    "url": "https://fullai.dev/icon-color.png"
+                },
+                "description": "AI Strategy & Software Development consultancy specializing in AI agents, RAG systems, multiplatform apps, and serverless cloud solutions.",
+                "email": "hello@fullai.dev",
+                "sameAs": []
+            },
+            {
+                "@type": "WebSite",
+                "@id": "https://fullai.dev/#website",
+                "url": "https://fullai.dev",
+                "name": "fullai.dev",
+                "description": "Your Digital Backbone - AI Strategy & Software Development",
+                "publisher": {
+                    "@id": "https://fullai.dev/#organization"
+                }
+            },
+            {
+                "@type": "ProfessionalService",
+                "@id": "https://fullai.dev/#service",
+                "name": "fullai.dev",
+                "url": "https://fullai.dev",
+                "description": "Transform your business with AI-powered apps, RAG systems, and multiplatform solutions.",
+                "provider": {
+                    "@id": "https://fullai.dev/#organization"
+                },
+                "serviceType": ["AI Consulting", "Software Development", "AI Agents", "RAG Systems", "Multiplatform Apps", "Cloud Infrastructure"],
+                "areaServed": "Worldwide"
+            }
+        ]
+    }
+    </script>
 </head>
 <body>
     <!-- Navigation -->
@@ -1774,7 +1855,7 @@ const currentYear = new Date().getFullYear();
             }
 
             .hero {
-                padding-top: 40px;
+                padding-top: 20px;
                 padding-bottom: 40px;
                 min-height: calc(100vh - 60px);
             }
