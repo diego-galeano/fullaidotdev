@@ -47,7 +47,7 @@ const currentYear = new Date().getFullYear();
         </div>
         <div class="hero-container">
             <div class="hero-content">
-                <div class="hero-badge" data-en="AI Strategy & Software Development" data-es="Estrategia + IA + Desarrollo de Software">AI Strategy & Software Development</div>
+                <div class="hero-badge" data-en="AI Strategy & Software Development" data-es="Estrategia + IA + Software">AI Strategy & Software Development</div>
                 <h1 class="hero-title">
                     <span class="title-line" data-en="Your" data-es="Tu">Your</span>
                     <span class="title-line highlight" data-en="Digital" data-es="Columna">Digital</span>
@@ -1774,8 +1774,8 @@ const currentYear = new Date().getFullYear();
 
             .hero {
                 padding-top: 80px;
-                padding-bottom: 40px;
-                min-height: auto;
+                padding-bottom: 80px;
+                min-height: calc(100vh - 120px);
             }
 
             .hero-content {
@@ -1789,12 +1789,12 @@ const currentYear = new Date().getFullYear();
 
             .hero-title {
                 font-size: clamp(1.75rem, 8vw, 2.5rem);
-                margin-bottom: 0.75rem;
+                margin: 0.75rem 0;
             }
 
             .hero-description {
                 font-size: 0.875rem;
-                margin-bottom: 1.5rem;
+                margin-bottom: 1.6rem;
                 line-height: 1.6;
             }
 
@@ -1802,7 +1802,7 @@ const currentYear = new Date().getFullYear();
                 flex-direction: column;
                 width: 100%;
                 padding: 0;
-                gap: 0.75rem;
+                gap: 1rem;
             }
 
             .hero-ctas .btn {
@@ -1813,7 +1813,9 @@ const currentYear = new Date().getFullYear();
             }
 
             .scroll-indicator {
-                display: none;
+                bottom: 2rem;
+                font-size: 0.75rem;
+                z-index: 1000;
             }
 
             /* Services */
