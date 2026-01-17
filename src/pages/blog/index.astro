@@ -1,597 +1,130 @@
 ---
 import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import GradientOrbs from '../../components/GradientOrbs.astro';
+import BlogCard from '../../components/BlogCard.astro';
 
 const allPosts = await getCollection('blog', ({ data }) => !data.draft);
 const sortedPosts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
-const siteUrl = "https://fullai.dev";
 const pageTitle = "Blog | fullai.dev";
 const pageDescription = "Insights on AI strategy, engineering, and software development from the fullai.dev team.";
-
-function formatDate(date: Date, lang: string = 'en'): string {
-    return date.toLocaleDateString(lang === 'es' ? 'es-ES' : 'en-US', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric'
-    });
-}
-
-function getReadingTime(content: string): number {
-    const wordsPerMinute = 200;
-    const words = content.split(/\s+/).length;
-    return Math.ceil(words / wordsPerMinute);
-}
 ---
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{pageTitle}</title>
-    <meta name="description" content={pageDescription}>
-    <meta name="robots" content="index, follow">
-    <link rel="canonical" href={`${siteUrl}/blog`}>
-
-    <meta name="theme-color" content="#0a0e17">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-
-    <meta property="og:type" content="website">
-    <meta property="og:url" content={`${siteUrl}/blog`}>
-    <meta property="og:title" content={pageTitle}>
-    <meta property="og:description" content={pageDescription}>
-    <meta property="og:image" content={`${siteUrl}/og-image.png`}>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
-</head>
-<body>
-    <a href="#main-content" class="skip-link">Skip to main content</a>
-
-    <!-- Navigation -->
-    <nav class="nav" role="navigation" aria-label="Main navigation">
-        <div class="nav-container">
-            <a href="/" class="logo" aria-label="fullai.dev Home">
-                <div class="logo-group">
-                    <img src="/logo.png" alt="fullai.dev" class="logo-img">
-                    <span class="logo-text">fullai<span class="dot">.</span>dev</span>
-                </div>
-            </a>
-            <div class="nav-links">
-                <a href="/#services" data-en="Services" data-es="Servicios">Services</a>
-                <a href="/#approach" data-en="Approach" data-es="Enfoque">Approach</a>
-                <a href="/blog" class="active" data-en="Blog" data-es="Blog">Blog</a>
-                <a href="/#contact" class="nav-cta" data-en="Let's Talk" data-es="Hablemos">Let's Talk</a>
-                <button class="lang-switch" id="langSwitch" aria-label="Switch language">
-                    <span class="flag" id="currentFlag">🇺🇸</span>
-                    <span class="lang-code" id="currentLang">EN</span>
-                </button>
-            </div>
-        </div>
-    </nav>
-
-    <main id="main-content">
-        <!-- Blog Header -->
-        <section class="blog-header">
-            <div class="blog-header-bg">
-                <div class="gradient-orb orb-1"></div>
-                <div class="gradient-orb orb-2"></div>
-            </div>
-            <div class="container">
-                <h1 class="blog-title" data-en="Blog" data-es="Blog">Blog</h1>
-                <p class="blog-subtitle" data-en="Insights on AI, engineering, and building the future" data-es="Ideas sobre IA, ingeniería y construyendo el futuro">Insights on AI, engineering, and building the future</p>
-
-            </div>
-        </section>
-
-        <!-- Blog Posts Grid -->
-        <section class="blog-grid-section">
-            <div class="container">
-                {sortedPosts.length === 0 ? (
-                    <div class="no-posts">
-                        <p data-en="No posts yet. Check back soon!" data-es="Aún no hay publicaciones. ¡Vuelve pronto!">No posts yet. Check back soon!</p>
-                    </div>
-                ) : (
-                    <div class="blog-grid">
-                        {sortedPosts.map((post) => (
-                            <article class="blog-card" data-lang={post.data.lang}>
-                                <div class="blog-card-inner">
-                                    <div class="blog-card-header">
-                                        <span class="blog-lang-badge">{post.data.lang.toUpperCase()}</span>
-                                        <time datetime={post.data.pubDate.toISOString()}>
-                                            {formatDate(post.data.pubDate, post.data.lang)}
-                                        </time>
-                                    </div>
-                                    <h2 class="blog-card-title">
-                                        <a href={`/blog/${post.slug}`}>{post.data.title}</a>
-                                    </h2>
-                                    <p class="blog-card-desc">{post.data.description}</p>
-                                    <div class="blog-card-footer">
-                                        <div class="blog-tags">
-                                            {post.data.tags.slice(0, 3).map((tag) => (
-                                                <span class="blog-tag">{tag}</span>
-                                            ))}
-                                        </div>
-                                        <a href={`/blog/${post.slug}`} class="read-more">
-                                            <span data-en="Read" data-es="Leer">Read</span>
-                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                                <path d="M5 12h14M12 5l7 7-7 7"/>
-                                            </svg>
-                                        </a>
-                                    </div>
-                                </div>
-                            </article>
-                        ))}
-                    </div>
-                )}
-            </div>
-        </section>
-    </main>
-
-    <!-- Footer -->
-    <footer class="footer">
+<BaseLayout title={pageTitle} description={pageDescription} currentPage="blog">
+    <section class="blog-header">
+        <GradientOrbs variant="section" />
         <div class="container">
-            <div class="footer-content">
-                <a href="/" class="footer-logo">
-                    <img src="/logo.png" alt="fullai.dev" class="footer-logo-img">
-                    <span>fullai<span class="dot">.</span>dev</span>
-                </a>
-                <p class="footer-tagline" data-en="Your Digital Backbone" data-es="Tu Columna Digital">Your Digital Backbone</p>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; {new Date().getFullYear()} fullai.dev. <span data-en="All rights reserved." data-es="Todos los derechos reservados.">All rights reserved.</span></p>
-            </div>
+            <h1 class="blog-title" data-en="Blog" data-es="Blog">Blog</h1>
+            <p class="blog-subtitle" data-en="Insights on AI, engineering, and building the future" data-es="Ideas sobre IA, ingeniería y construyendo el futuro">Insights on AI, engineering, and building the future</p>
         </div>
-    </footer>
+    </section>
 
-    <style>
-        :root {
-            --color-bg: #0a0e17;
-            --color-surface: #141821;
-            --color-surface-elevated: #1a1f2e;
-            --color-primary: #00ffa3;
-            --color-primary-dim: #00cc82;
-            --color-accent: #00d4ff;
-            --color-text: #e8edf4;
-            --color-text-dim: #98a2b3;
-            --color-border: #2a3142;
-            --font-display: 'Syne', sans-serif;
-            --font-mono: 'JetBrains Mono', monospace;
-            --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
-        }
+    <section class="blog-grid-section">
+        <div class="container">
+            {sortedPosts.length === 0 ? (
+                <div class="no-posts">
+                    <p data-en="No posts yet. Check back soon!" data-es="Aún no hay publicaciones. ¡Vuelve pronto!">No posts yet. Check back soon!</p>
+                </div>
+            ) : (
+                <div class="blog-grid">
+                    {sortedPosts.map((post) => (
+                        <BlogCard
+                            title={post.data.title}
+                            description={post.data.description}
+                            slug={post.slug}
+                            pubDate={post.data.pubDate}
+                            lang={post.data.lang}
+                            tags={post.data.tags}
+                        />
+                    ))}
+                </div>
+            )}
+        </div>
+    </section>
+</BaseLayout>
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<style>
+    .blog-header {
+        position: relative;
+        padding: 10rem 0 4rem;
+        text-align: center;
+        overflow: hidden;
+    }
 
-        body {
-            font-family: var(--font-mono);
-            background: var(--color-bg);
-            color: var(--color-text);
-            line-height: 1.6;
-            min-height: 100vh;
-        }
+    .blog-title {
+        font-family: var(--font-display);
+        font-size: clamp(3rem, 8vw, 5rem);
+        font-weight: 800;
+        background: linear-gradient(135deg, var(--color-text), var(--color-primary));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 1rem;
+    }
 
-        .skip-link {
-            position: absolute;
-            top: -100%;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--color-primary);
-            color: var(--color-bg);
-            padding: 0.75rem 1.5rem;
-            border-radius: 0 0 8px 8px;
-            font-weight: 600;
-            z-index: 10000;
-            transition: top 0.3s var(--ease-smooth);
-            text-decoration: none;
-        }
+    .blog-subtitle {
+        color: var(--color-text-dim);
+        font-size: 1.1rem;
+        max-width: 500px;
+        margin: 0 auto;
+    }
 
-        .skip-link:focus {
-            top: 0;
-        }
+    .blog-grid-section {
+        padding: 4rem 0 6rem;
+    }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
+    .blog-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+        gap: 2rem;
+    }
 
-        /* Navigation */
-        .nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            background: rgba(10, 14, 23, 0.9);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--color-border);
-        }
+    .no-posts {
+        text-align: center;
+        padding: 4rem 2rem;
+        color: var(--color-text-dim);
+    }
 
-        .nav-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            text-decoration: none;
-        }
-
-        .logo-group {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-
-        .logo-img {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-        }
-
-        .logo-text {
-            font-family: var(--font-display);
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--color-text);
-        }
-
-        .dot {
-            color: var(--color-primary);
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            align-items: center;
-        }
-
-        .nav-links a {
-            color: var(--color-text-dim);
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: color 0.3s var(--ease-smooth);
-        }
-
-        .nav-links a:hover,
-        .nav-links a.active {
-            color: var(--color-primary);
-        }
-
-        .nav-cta {
-            background: var(--color-primary) !important;
-            color: var(--color-bg) !important;
-            padding: 0.5rem 1.5rem !important;
-            border-radius: 6px;
-            font-weight: 500;
-        }
-
-        .lang-switch {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: var(--color-surface);
-            border: 1px solid var(--color-border);
-            padding: 0.5rem 0.75rem;
-            border-radius: 6px;
-            cursor: pointer;
-            color: var(--color-text);
-            font-family: var(--font-mono);
-            font-size: 0.85rem;
-        }
-
-        /* Blog Header */
+    @media (max-width: 768px) {
         .blog-header {
-            position: relative;
-            padding: 10rem 0 4rem;
-            text-align: center;
-            overflow: hidden;
-        }
-
-        .blog-header-bg {
-            position: absolute;
-            inset: 0;
-            z-index: -1;
-        }
-
-        .gradient-orb {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(100px);
-            opacity: 0.3;
-        }
-
-        .orb-1 {
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, var(--color-primary), transparent);
-            top: -200px;
-            left: -100px;
-        }
-
-        .orb-2 {
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, var(--color-accent), transparent);
-            bottom: -100px;
-            right: -100px;
+            padding: 8rem 0 3rem;
         }
 
         .blog-title {
-            font-family: var(--font-display);
-            font-size: clamp(3rem, 8vw, 5rem);
-            font-weight: 800;
-            background: linear-gradient(135deg, var(--color-text), var(--color-primary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 1rem;
-        }
-
-        .blog-subtitle {
-            color: var(--color-text-dim);
-            font-size: 1.1rem;
-            max-width: 500px;
-            margin: 0 auto 2rem;
-        }
-
-        /* Blog Grid */
-        .blog-grid-section {
-            padding: 4rem 0 6rem;
+            font-size: 2.5rem;
         }
 
         .blog-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-            gap: 2rem;
+            grid-template-columns: 1fr;
         }
+    }
+</style>
 
-        .blog-card {
-            background: var(--color-surface);
-            border-radius: 16px;
-            overflow: hidden;
-            border: 1px solid var(--color-border);
-            transition: all 0.4s var(--ease-smooth);
-        }
+<script>
+    // Filter blog cards by language when language changes
+    const blogCards = document.querySelectorAll('.blog-card');
 
-        .blog-card:hover {
-            transform: translateY(-8px);
-            border-color: var(--color-primary);
-            box-shadow: 0 20px 40px rgba(0, 255, 163, 0.1);
-        }
-
-        .blog-card.hidden {
-            display: none;
-        }
-
-        .blog-card-inner {
-            padding: 1.75rem;
-        }
-
-        .blog-card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1rem;
-        }
-
-        .blog-lang-badge {
-            background: var(--color-surface-elevated);
-            color: var(--color-accent);
-            padding: 0.25rem 0.75rem;
-            border-radius: 12px;
-            font-size: 0.7rem;
-            font-weight: 600;
-            letter-spacing: 0.05em;
-        }
-
-        .blog-card-header time {
-            color: var(--color-text-dim);
-            font-size: 0.8rem;
-        }
-
-        .blog-card-title {
-            font-family: var(--font-display);
-            font-size: 1.35rem;
-            font-weight: 700;
-            margin-bottom: 0.75rem;
-            line-height: 1.3;
-        }
-
-        .blog-card-title a {
-            color: var(--color-text);
-            text-decoration: none;
-            transition: color 0.3s var(--ease-smooth);
-        }
-
-        .blog-card-title a:hover {
-            color: var(--color-primary);
-        }
-
-        .blog-card-desc {
-            color: var(--color-text-dim);
-            font-size: 0.9rem;
-            line-height: 1.6;
-            margin-bottom: 1.5rem;
-        }
-
-        .blog-card-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .blog-tags {
-            display: flex;
-            gap: 0.5rem;
-            flex-wrap: wrap;
-        }
-
-        .blog-tag {
-            background: var(--color-surface-elevated);
-            color: var(--color-text-dim);
-            padding: 0.25rem 0.6rem;
-            border-radius: 6px;
-            font-size: 0.7rem;
-        }
-
-        .read-more {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: var(--color-primary);
-            font-size: 0.85rem;
-            font-weight: 500;
-            text-decoration: none;
-        }
-
-        .read-more svg {
-            transition: transform 0.3s var(--ease-smooth);
-        }
-
-        .read-more:hover svg {
-            transform: translateX(4px);
-        }
-
-        .no-posts {
-            text-align: center;
-            padding: 4rem 2rem;
-            color: var(--color-text-dim);
-        }
-
-        /* Footer */
-        .footer {
-            background: var(--color-surface);
-            border-top: 1px solid var(--color-border);
-            padding: 3rem 0 2rem;
-        }
-
-        .footer-content {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-
-        .footer-logo {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.75rem;
-            text-decoration: none;
-            color: var(--color-text);
-            font-family: var(--font-display);
-            font-size: 1.25rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-        }
-
-        .footer-logo-img {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-        }
-
-        .footer-tagline {
-            color: var(--color-text-dim);
-            font-size: 0.9rem;
-        }
-
-        .footer-bottom {
-            text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid var(--color-border);
-            color: var(--color-text-dim);
-            font-size: 0.85rem;
-        }
-
-        /* Mobile Responsive */
-        @media (max-width: 768px) {
-            .nav-links a:not(.nav-cta):not(.lang-switch) {
-                display: none;
+    function filterBlogCards(lang: string) {
+        blogCards.forEach(card => {
+            const cardLang = card.getAttribute('data-lang');
+            if (cardLang === lang) {
+                card.classList.remove('hidden');
+            } else {
+                card.classList.add('hidden');
             }
-
-            .blog-header {
-                padding: 8rem 0 3rem;
-            }
-
-            .blog-title {
-                font-size: 2.5rem;
-            }
-
-            .blog-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .container {
-                padding: 0 1rem;
-            }
-        }
-
-        /* Focus visible */
-        :focus-visible {
-            outline: 2px solid var(--color-accent);
-            outline-offset: 3px;
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            * {
-                animation: none !important;
-                transition: none !important;
-            }
-        }
-    </style>
-
-    <script>
-        // Language Switcher
-        const langSwitch = document.getElementById('langSwitch');
-        const currentFlag = document.getElementById('currentFlag');
-        const currentLang = document.getElementById('currentLang');
-        const blogCards = document.querySelectorAll('.blog-card');
-        let isEnglish = localStorage.getItem('lang') !== 'es';
-
-        function filterBlogCards(lang: string) {
-            blogCards.forEach(card => {
-                const cardLang = card.getAttribute('data-lang');
-                if (cardLang === lang) {
-                    card.classList.remove('hidden');
-                } else {
-                    card.classList.add('hidden');
-                }
-            });
-        }
-
-        function updateLanguage(toEnglish: boolean) {
-            isEnglish = toEnglish;
-            localStorage.setItem('lang', isEnglish ? 'en' : 'es');
-
-            currentFlag!.textContent = isEnglish ? '🇺🇸' : '🇪🇸';
-            currentLang!.textContent = isEnglish ? 'EN' : 'ES';
-
-            document.querySelectorAll('[data-en][data-es]').forEach(el => {
-                const htmlEl = el as HTMLElement;
-                htmlEl.textContent = isEnglish ? htmlEl.dataset.en! : htmlEl.dataset.es!;
-            });
-
-            // Filter blog cards by selected language
-            filterBlogCards(isEnglish ? 'en' : 'es');
-        }
-
-        // Initialize
-        updateLanguage(isEnglish);
-
-        langSwitch?.addEventListener('click', () => {
-            updateLanguage(!isEnglish);
         });
-    </script>
-</body>
-</html>
+    }
+
+    // Listen for language changes (from BaseLayout's language switcher)
+    const langSwitch = document.getElementById('langSwitch');
+    let isEnglish = localStorage.getItem('lang') !== 'es';
+
+    // Initial filter
+    filterBlogCards(isEnglish ? 'en' : 'es');
+
+    langSwitch?.addEventListener('click', () => {
+        isEnglish = !isEnglish;
+        filterBlogCards(isEnglish ? 'en' : 'es');
+    });
+</script>
