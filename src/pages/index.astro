@@ -1,6 +1,22 @@
 ---
 // fullai.dev - Digital Backbone
+import { getCollection } from 'astro:content';
+
 const currentYear = new Date().getFullYear();
+
+// Get latest blog posts
+const allPosts = await getCollection('blog', ({ data }) => !data.draft);
+const latestPosts = allPosts
+    .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+    .slice(0, 3);
+
+function formatDate(date: Date, lang: string = 'en'): string {
+    return date.toLocaleDateString(lang === 'es' ? 'es-ES' : 'en-US', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric'
+    });
+}
 
 // SEO Configuration
 const siteUrl = "https://fullai.dev";
@@ -196,6 +212,7 @@ const twitterHandle = "@fullaidev";
             <div class="nav-links">
                 <a href="#services" data-en="Services" data-es="Servicios">Services</a>
                 <a href="#approach" data-en="Approach" data-es="Enfoque">Approach</a>
+                <a href="/blog" data-en="Blog" data-es="Blog">Blog</a>
                 <a href="#contact" class="nav-cta" data-en="Let's Talk" data-es="Hablemos">Let's Talk</a>
                 <button class="lang-switch" id="langSwitch" aria-label="Switch language">
                     <span class="flag" id="currentFlag">🇺🇸</span>
@@ -435,6 +452,46 @@ const twitterHandle = "@fullaidev";
         </div>
     </section>
 
+    <!-- Blog Preview Section -->
+    <section id="blog" class="blog-preview">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" data-en="Latest Insights" data-es="Últimas Publicaciones">Latest Insights</h2>
+                <a href="/blog" class="view-all-link" data-en="View all posts" data-es="Ver todas">
+                    View all posts
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </a>
+            </div>
+            {latestPosts.length > 0 ? (
+                <div class="blog-preview-grid">
+                    {latestPosts.map((post) => (
+                        <article class="blog-preview-card">
+                            <div class="blog-preview-header">
+                                <span class="blog-lang-badge">{post.data.lang.toUpperCase()}</span>
+                                <time datetime={post.data.pubDate.toISOString()}>
+                                    {formatDate(post.data.pubDate, post.data.lang)}
+                                </time>
+                            </div>
+                            <h3 class="blog-preview-title">
+                                <a href={`/blog/${post.slug}`}>{post.data.title}</a>
+                            </h3>
+                            <p class="blog-preview-desc">{post.data.description}</p>
+                            <div class="blog-preview-tags">
+                                {post.data.tags.slice(0, 2).map((tag) => (
+                                    <span class="blog-tag">{tag}</span>
+                                ))}
+                            </div>
+                        </article>
+                    ))}
+                </div>
+            ) : (
+                <p class="no-posts-message" data-en="Coming soon..." data-es="Próximamente...">Coming soon...</p>
+            )}
+        </div>
+    </section>
+
     <!-- Contact Section -->
     <section id="contact" class="contact">
         <div class="container">
@@ -510,6 +567,13 @@ const twitterHandle = "@fullaidev";
                 <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
             <span data-en="Approach" data-es="Enfoque">Approach</span>
+        </a>
+        <a href="/blog" class="bottom-nav-item" aria-label="Blog">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M6.5 2H20V22H6.5A2.5 2.5 0 0 1 4 19.5V4.5A2.5 2.5 0 0 1 6.5 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span data-en="Blog" data-es="Blog">Blog</span>
         </a>
         <a href="#contact" class="bottom-nav-item" aria-label="Contact">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -1644,6 +1708,152 @@ const twitterHandle = "@fullaidev";
         .code-function { color: var(--color-accent); }
         .code-string { color: #50fa7b; }
         .code-boolean { color: var(--color-primary); }
+
+        /* Blog Preview Section */
+        .blog-preview {
+            padding: 6rem 0;
+        }
+
+        .blog-preview .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .view-all-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--color-primary);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: all 0.3s var(--ease-smooth);
+        }
+
+        .view-all-link:hover {
+            color: var(--color-accent);
+        }
+
+        .view-all-link svg {
+            transition: transform 0.3s var(--ease-smooth);
+        }
+
+        .view-all-link:hover svg {
+            transform: translateX(4px);
+        }
+
+        .blog-preview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .blog-preview-card {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 16px;
+            padding: 1.75rem;
+            transition: all 0.4s var(--ease-smooth);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .blog-preview-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+            transform: scaleX(0);
+            transition: transform 0.4s var(--ease-smooth);
+        }
+
+        .blog-preview-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--color-primary);
+            box-shadow: 0 20px 40px rgba(0, 255, 163, 0.1);
+        }
+
+        .blog-preview-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .blog-preview-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .blog-lang-badge {
+            background: var(--color-surface-elevated);
+            color: var(--color-accent);
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+        }
+
+        .blog-preview-header time {
+            color: var(--color-text-dim);
+            font-size: 0.8rem;
+        }
+
+        .blog-preview-title {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            line-height: 1.3;
+        }
+
+        .blog-preview-title a {
+            color: var(--color-text);
+            text-decoration: none;
+            transition: color 0.3s var(--ease-smooth);
+        }
+
+        .blog-preview-title a:hover {
+            color: var(--color-primary);
+        }
+
+        .blog-preview-desc {
+            color: var(--color-text-dim);
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 1.25rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .blog-preview-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .blog-tag {
+            background: var(--color-surface-elevated);
+            color: var(--color-text-dim);
+            padding: 0.25rem 0.6rem;
+            border-radius: 6px;
+            font-size: 0.7rem;
+        }
+
+        .no-posts-message {
+            text-align: center;
+            color: var(--color-text-dim);
+            padding: 3rem;
+        }
 
         /* Contact Section */
         .contact {
