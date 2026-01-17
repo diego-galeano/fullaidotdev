@@ -1,0 +1,131 @@
+---
+interface Props {
+    filename?: string;
+}
+
+const { filename = 'ai_pipeline.py' } = Astro.props;
+---
+
+<div class="code-window">
+    <div class="code-header">
+        <div class="code-dots">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="code-title">{filename}</div>
+    </div>
+    <div class="code-content">
+        <slot />
+    </div>
+</div>
+
+<style>
+    .code-window {
+        background: var(--color-surface-elevated);
+        border: 1px solid var(--color-border);
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5);
+        transition: all 0.4s var(--ease-smooth);
+    }
+
+    .code-window:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 35px 100px rgba(0, 0, 0, 0.6),
+                    0 0 40px rgba(0, 255, 163, 0.1);
+    }
+
+    .code-header {
+        background: var(--color-surface);
+        padding: 1rem 1.25rem;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        border-bottom: 1px solid var(--color-border);
+    }
+
+    .code-dots {
+        display: flex;
+        gap: 0.5rem;
+    }
+
+    .code-dots span {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: var(--color-border);
+        transition: transform 0.3s var(--ease-smooth);
+    }
+
+    .code-window:hover .code-dots span {
+        transform: scale(1.1);
+    }
+
+    .code-dots span:nth-child(1) { background: #ff5f57; }
+    .code-dots span:nth-child(2) { background: #ffbd2e; }
+    .code-dots span:nth-child(3) { background: #28ca42; }
+
+    .code-title {
+        color: var(--color-text-dim);
+        font-size: 0.9rem;
+        flex: 1;
+        text-align: center;
+        margin-right: 2.5rem;
+    }
+
+    .code-content {
+        padding: 1rem 1.25rem;
+        font-family: var(--font-mono);
+        font-size: 1.2rem;
+        line-height: 1.2;
+        color: var(--color-text-dim);
+        background: linear-gradient(180deg, var(--color-surface-elevated) 0%, rgba(10, 14, 23, 0.8) 100%);
+    }
+
+    .code-content :global(pre) {
+        margin: 0;
+        font-family: inherit;
+        font-size: inherit;
+        line-height: inherit;
+    }
+
+    .code-content :global(code) {
+        display: block;
+    }
+
+    .code-content :global(.code-line) {
+        display: block;
+        min-height: 1.2em;
+    }
+
+    .code-content :global(.code-comment) { color: #6a737d; }
+    .code-content :global(.code-keyword) { color: #ff79c6; }
+    .code-content :global(.code-function) { color: var(--color-accent); }
+    .code-content :global(.code-string) { color: #50fa7b; }
+    .code-content :global(.code-boolean) { color: var(--color-primary); }
+
+    @media (max-width: 640px) {
+        .code-window {
+            border-radius: 10px;
+        }
+
+        .code-header {
+            padding: 0.75rem 1rem;
+        }
+
+        .code-dots span {
+            width: 10px;
+            height: 10px;
+        }
+
+        .code-title {
+            font-size: 0.8rem;
+        }
+
+        .code-content {
+            padding: 1rem;
+            font-size: 0.8rem;
+        }
+    }
+</style>

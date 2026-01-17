@@ -1,0 +1,192 @@
+---
+interface Props {
+    title: string;
+    description: string;
+    slug: string;
+    pubDate: Date;
+    lang: 'en' | 'es';
+    tags: string[];
+    variant?: 'default' | 'preview';
+}
+
+const { title, description, slug, pubDate, lang, tags, variant = 'default' } = Astro.props;
+
+function formatDate(date: Date, language: string = 'en'): string {
+    return date.toLocaleDateString(language === 'es' ? 'es-ES' : 'en-US', {
+        year: 'numeric',
+        month: variant === 'preview' ? 'short' : 'long',
+        day: 'numeric'
+    });
+}
+
+const maxTags = variant === 'preview' ? 2 : 3;
+---
+
+<article class:list={['blog-card', { 'preview': variant === 'preview' }]} data-lang={lang}>
+    <div class="blog-card-inner">
+        <div class="blog-card-header">
+            <span class="blog-lang-badge">{lang.toUpperCase()}</span>
+            <time datetime={pubDate.toISOString()}>
+                {formatDate(pubDate, lang)}
+            </time>
+        </div>
+        <h3 class="blog-card-title">
+            <a href={`/blog/${slug}`}>{title}</a>
+        </h3>
+        <p class="blog-card-desc">{description}</p>
+        <div class="blog-card-footer">
+            <div class="blog-tags">
+                {tags.slice(0, maxTags).map((tag) => (
+                    <span class="blog-tag">{tag}</span>
+                ))}
+            </div>
+            {variant === 'default' && (
+                <a href={`/blog/${slug}`} class="read-more">
+                    <span data-en="Read" data-es="Leer">Read</span>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </a>
+            )}
+        </div>
+    </div>
+</article>
+
+<style>
+    .blog-card {
+        background: var(--color-surface);
+        border: 1px solid var(--color-border);
+        border-radius: 16px;
+        overflow: hidden;
+        transition: all 0.4s var(--ease-smooth);
+        position: relative;
+    }
+
+    .blog-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+        transform: scaleX(0);
+        transition: transform 0.4s var(--ease-smooth);
+    }
+
+    .blog-card:hover {
+        transform: translateY(-8px);
+        border-color: var(--color-primary);
+        box-shadow: 0 20px 40px rgba(0, 255, 163, 0.1);
+    }
+
+    .blog-card:hover::before {
+        transform: scaleX(1);
+    }
+
+    .blog-card.hidden {
+        display: none;
+    }
+
+    .blog-card-inner {
+        padding: 1.75rem;
+    }
+
+    .blog-card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1rem;
+    }
+
+    .blog-lang-badge {
+        background: var(--color-surface-elevated);
+        color: var(--color-accent);
+        padding: 0.25rem 0.75rem;
+        border-radius: 12px;
+        font-size: 0.7rem;
+        font-weight: 600;
+        letter-spacing: 0.05em;
+    }
+
+    .blog-card-header time {
+        color: var(--color-text-dim);
+        font-size: 0.8rem;
+    }
+
+    .blog-card-title {
+        font-family: var(--font-display);
+        font-size: 1.25rem;
+        font-weight: 700;
+        margin-bottom: 0.75rem;
+        line-height: 1.3;
+    }
+
+    .blog-card-title a {
+        color: var(--color-text);
+        text-decoration: none;
+        transition: color 0.3s var(--ease-smooth);
+    }
+
+    .blog-card-title a:hover {
+        color: var(--color-primary);
+    }
+
+    .blog-card-desc {
+        color: var(--color-text-dim);
+        font-size: 0.9rem;
+        line-height: 1.6;
+        margin-bottom: 1.25rem;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .blog-card-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .blog-tags {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+    }
+
+    .blog-tag {
+        background: var(--color-surface-elevated);
+        color: var(--color-text-dim);
+        padding: 0.25rem 0.6rem;
+        border-radius: 6px;
+        font-size: 0.7rem;
+    }
+
+    .read-more {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: var(--color-primary);
+        font-size: 0.85rem;
+        font-weight: 500;
+        text-decoration: none;
+    }
+
+    .read-more svg {
+        transition: transform 0.3s var(--ease-smooth);
+    }
+
+    .read-more:hover svg {
+        transform: translateX(4px);
+    }
+
+    /* Preview variant (homepage) */
+    .blog-card.preview .blog-card-title {
+        font-size: 1.15rem;
+    }
+
+    .blog-card.preview .blog-card-desc {
+        -webkit-line-clamp: 2;
+    }
+</style>

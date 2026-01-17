@@ -1,0 +1,109 @@
+---
+interface Props {
+    variant?: 'hero' | 'section' | 'minimal';
+}
+
+const { variant = 'section' } = Astro.props;
+---
+
+<div class:list={['gradient-orbs', variant]}>
+    <div class="gradient-orb orb-1"></div>
+    <div class="gradient-orb orb-2"></div>
+    {variant === 'hero' && <div class="gradient-orb orb-3"></div>}
+</div>
+
+<style>
+    .gradient-orbs {
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        overflow: hidden;
+        pointer-events: none;
+    }
+
+    .gradient-orb {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(100px);
+        opacity: 0.3;
+        animation: orbFloat 8s ease-in-out infinite;
+    }
+
+    @keyframes orbFloat {
+        0%, 100% { transform: translate(0, 0) scale(1); }
+        33% { transform: translate(20px, -20px) scale(1.05); }
+        66% { transform: translate(-10px, 10px) scale(0.95); }
+    }
+
+    /* Hero variant */
+    .hero .orb-1 {
+        width: 600px;
+        height: 600px;
+        background: radial-gradient(circle, var(--color-primary), transparent);
+        top: -200px;
+        left: -200px;
+    }
+
+    .hero .orb-2 {
+        width: 500px;
+        height: 500px;
+        background: radial-gradient(circle, var(--color-accent), transparent);
+        bottom: -100px;
+        right: -150px;
+        animation-delay: -2s;
+    }
+
+    .hero .orb-3 {
+        width: 300px;
+        height: 300px;
+        background: radial-gradient(circle, var(--color-primary), transparent);
+        top: 50%;
+        right: 20%;
+        opacity: 0.2;
+        animation-delay: -4s;
+    }
+
+    /* Section variant */
+    .section .orb-1 {
+        width: 500px;
+        height: 500px;
+        background: radial-gradient(circle, var(--color-primary), transparent);
+        top: -200px;
+        left: -100px;
+    }
+
+    .section .orb-2 {
+        width: 400px;
+        height: 400px;
+        background: radial-gradient(circle, var(--color-accent), transparent);
+        bottom: -100px;
+        right: -100px;
+        animation-delay: -2s;
+    }
+
+    /* Minimal variant */
+    .minimal .orb-1 {
+        width: 400px;
+        height: 400px;
+        background: radial-gradient(circle, var(--color-primary), transparent);
+        top: -100px;
+        left: -100px;
+        opacity: 0.2;
+    }
+
+    .minimal .orb-2 {
+        width: 300px;
+        height: 300px;
+        background: radial-gradient(circle, var(--color-accent), transparent);
+        bottom: -50px;
+        right: -50px;
+        opacity: 0.2;
+        animation-delay: -2s;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .gradient-orb {
+            animation: none;
+        }
+    }
+</style>

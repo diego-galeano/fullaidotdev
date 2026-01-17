@@ -1,0 +1,201 @@
+---
+import Navigation from '../components/Navigation.astro';
+import Footer from '../components/Footer.astro';
+import MobileBottomNav from '../components/MobileBottomNav.astro';
+
+interface Props {
+    title: string;
+    description: string;
+    currentPage?: string;
+    ogImage?: string;
+    noIndex?: boolean;
+}
+
+const {
+    title,
+    description,
+    currentPage = 'home',
+    ogImage = '/og-image.png',
+    noIndex = false
+} = Astro.props;
+
+const siteUrl = "https://fullai.dev";
+const canonicalUrl = new URL(Astro.url.pathname, siteUrl).toString();
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Primary Meta Tags -->
+    <title>{title}</title>
+    <meta name="title" content={title}>
+    <meta name="description" content={description}>
+    <meta name="author" content="fullai.dev">
+    {noIndex ? (
+        <meta name="robots" content="noindex, nofollow">
+    ) : (
+        <meta name="robots" content="index, follow">
+    )}
+    <link rel="canonical" href={canonicalUrl}>
+
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#0a0e17">
+    <meta name="msapplication-TileColor" content="#0a0e17">
+    <meta name="color-scheme" content="dark">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/manifest.json">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content={canonicalUrl}>
+    <meta property="og:title" content={title}>
+    <meta property="og:description" content={description}>
+    <meta property="og:image" content={`${siteUrl}${ogImage}`}>
+    <meta property="og:site_name" content="fullai.dev">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content={canonicalUrl}>
+    <meta name="twitter:title" content={title}>
+    <meta name="twitter:description" content={description}>
+    <meta name="twitter:image" content={`${siteUrl}${ogImage}`}>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <slot name="head" />
+</head>
+<body>
+    <Navigation currentPage={currentPage} />
+
+    <main id="main-content">
+        <slot />
+    </main>
+
+    <MobileBottomNav />
+    <Footer />
+
+    <style is:global>
+        :root {
+            --color-bg: #0a0e17;
+            --color-surface: #141821;
+            --color-surface-elevated: #1a1f2e;
+            --color-primary: #00ffa3;
+            --color-primary-dim: #00cc82;
+            --color-accent: #00d4ff;
+            --color-text: #e8edf4;
+            --color-text-dim: #98a2b3;
+            --color-border: #2a3142;
+
+            --font-display: 'Syne', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+
+            --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+            --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
+        }
+
+        body {
+            font-family: var(--font-mono);
+            background: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Focus Visible Styles */
+        *:focus {
+            outline: none;
+        }
+
+        *:focus-visible {
+            outline: 2px solid var(--color-primary);
+            outline-offset: 3px;
+        }
+
+        a:focus-visible,
+        button:focus-visible {
+            outline: 2px solid var(--color-primary);
+            outline-offset: 3px;
+            border-radius: 4px;
+        }
+
+        /* Reduced Motion */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+        /* Container */
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Smooth text transitions for language switching */
+        [data-en][data-es] {
+            transition: opacity 0.3s var(--ease-smooth);
+        }
+
+        .lang-switching [data-en][data-es] {
+            opacity: 0;
+        }
+    </style>
+
+    <script>
+        // Language Switcher
+        const langSwitch = document.getElementById('langSwitch');
+        const currentFlag = document.getElementById('currentFlag');
+        const currentLang = document.getElementById('currentLang');
+        let isEnglish = localStorage.getItem('lang') !== 'es';
+
+        function updateLanguage(toEnglish: boolean) {
+            isEnglish = toEnglish;
+            localStorage.setItem('lang', isEnglish ? 'en' : 'es');
+
+            if (currentFlag) currentFlag.textContent = isEnglish ? '🇺🇸' : '🇪🇸';
+            if (currentLang) currentLang.textContent = isEnglish ? 'EN' : 'ES';
+
+            document.querySelectorAll('[data-en][data-es]').forEach(el => {
+                const htmlEl = el as HTMLElement;
+                htmlEl.textContent = isEnglish ? htmlEl.dataset.en! : htmlEl.dataset.es!;
+            });
+        }
+
+        // Initialize
+        updateLanguage(isEnglish);
+
+        langSwitch?.addEventListener('click', () => {
+            updateLanguage(!isEnglish);
+        });
+    </script>
+</body>
+</html>

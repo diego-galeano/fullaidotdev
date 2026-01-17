@@ -1,0 +1,104 @@
+---
+interface Props {
+    titleEn: string;
+    titleEs: string;
+    descriptionEn: string;
+    descriptionEs: string;
+}
+
+const { titleEn, titleEs, descriptionEn, descriptionEs } = Astro.props;
+---
+
+<div class="service-card">
+    <div class="service-icon">
+        <slot name="icon" />
+    </div>
+    <h3 data-en={titleEn} data-es={titleEs}>{titleEn}</h3>
+    <p data-en={descriptionEn} data-es={descriptionEs}>{descriptionEn}</p>
+</div>
+
+<style>
+    .service-card {
+        background: var(--color-surface);
+        padding: 2.5rem;
+        border-radius: 16px;
+        position: relative;
+        border: 1px solid var(--color-border);
+        transition: all 0.5s var(--ease-smooth);
+        overflow: hidden;
+    }
+
+    .service-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.5s var(--ease-smooth);
+    }
+
+    .service-card:hover::before {
+        transform: scaleX(1);
+    }
+
+    .service-card:hover {
+        transform: translateY(-10px);
+        box-shadow:
+            0 20px 40px rgba(0, 0, 0, 0.3),
+            0 0 30px rgba(0, 255, 163, 0.1);
+        border-color: rgba(0, 255, 163, 0.3);
+    }
+
+    .service-icon {
+        width: 64px;
+        height: 64px;
+        background: linear-gradient(135deg, rgba(0, 255, 163, 0.1), rgba(0, 212, 255, 0.1));
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 1.5rem;
+        color: var(--color-primary);
+        transition: all 0.5s var(--ease-smooth);
+    }
+
+    .service-card:hover .service-icon {
+        background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+        color: var(--color-bg);
+        transform: rotate(-5deg) scale(1.05);
+    }
+
+    .service-card h3 {
+        font-family: var(--font-display);
+        font-size: 1.35rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        color: var(--color-text);
+    }
+
+    .service-card p {
+        color: var(--color-text-dim);
+        line-height: 1.7;
+        font-size: 0.95rem;
+    }
+
+    @media (max-width: 640px) {
+        .service-card {
+            padding: 1.75rem;
+        }
+
+        .service-card h3 {
+            font-size: 1.15rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .service-card p {
+            font-size: 0.85rem;
+            line-height: 1.6;
+        }
+    }
+</style>
