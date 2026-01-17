@@ -84,12 +84,6 @@ function getReadingTime(content: string): number {
                 <h1 class="blog-title" data-en="Blog" data-es="Blog">Blog</h1>
                 <p class="blog-subtitle" data-en="Insights on AI, engineering, and building the future" data-es="Ideas sobre IA, ingeniería y construyendo el futuro">Insights on AI, engineering, and building the future</p>
 
-                <!-- Language Filter -->
-                <div class="lang-filter">
-                    <button class="filter-btn active" data-filter="all" data-en="All" data-es="Todos">All</button>
-                    <button class="filter-btn" data-filter="en">English</button>
-                    <button class="filter-btn" data-filter="es">Espanol</button>
-                </div>
             </div>
         </section>
 
@@ -353,37 +347,6 @@ function getReadingTime(content: string): number {
             margin: 0 auto 2rem;
         }
 
-        /* Language Filter */
-        .lang-filter {
-            display: flex;
-            gap: 0.75rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .filter-btn {
-            background: var(--color-surface);
-            border: 1px solid var(--color-border);
-            color: var(--color-text-dim);
-            padding: 0.5rem 1.25rem;
-            border-radius: 20px;
-            font-family: var(--font-mono);
-            font-size: 0.85rem;
-            cursor: pointer;
-            transition: all 0.3s var(--ease-smooth);
-        }
-
-        .filter-btn:hover {
-            border-color: var(--color-primary);
-            color: var(--color-primary);
-        }
-
-        .filter-btn.active {
-            background: var(--color-primary);
-            border-color: var(--color-primary);
-            color: var(--color-bg);
-        }
-
         /* Blog Grid */
         .blog-grid-section {
             padding: 4rem 0 6rem;
@@ -589,33 +552,23 @@ function getReadingTime(content: string): number {
     </style>
 
     <script>
-        // Language Filter
-        const filterBtns = document.querySelectorAll('.filter-btn');
-        const blogCards = document.querySelectorAll('.blog-card');
-
-        filterBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const filter = btn.getAttribute('data-filter');
-
-                filterBtns.forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-
-                blogCards.forEach(card => {
-                    const lang = card.getAttribute('data-lang');
-                    if (filter === 'all' || lang === filter) {
-                        card.classList.remove('hidden');
-                    } else {
-                        card.classList.add('hidden');
-                    }
-                });
-            });
-        });
-
         // Language Switcher
         const langSwitch = document.getElementById('langSwitch');
         const currentFlag = document.getElementById('currentFlag');
         const currentLang = document.getElementById('currentLang');
+        const blogCards = document.querySelectorAll('.blog-card');
         let isEnglish = localStorage.getItem('lang') !== 'es';
+
+        function filterBlogCards(lang: string) {
+            blogCards.forEach(card => {
+                const cardLang = card.getAttribute('data-lang');
+                if (cardLang === lang) {
+                    card.classList.remove('hidden');
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+        }
 
         function updateLanguage(toEnglish: boolean) {
             isEnglish = toEnglish;
@@ -628,6 +581,9 @@ function getReadingTime(content: string): number {
                 const htmlEl = el as HTMLElement;
                 htmlEl.textContent = isEnglish ? htmlEl.dataset.en! : htmlEl.dataset.es!;
             });
+
+            // Filter blog cards by selected language
+            filterBlogCards(isEnglish ? 'en' : 'es');
         }
 
         // Initialize
