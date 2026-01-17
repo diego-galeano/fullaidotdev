@@ -21,10 +21,15 @@ const twitterHandle = "@fullaidev";
     <title>{siteTitle}</title>
     <meta name="title" content={siteTitle}>
     <meta name="description" content={siteDescription}>
-    <meta name="keywords" content="AI consulting, AI development, RAG systems, AI agents, LLM, multiplatform apps, cross-platform development, serverless cloud, rapid prototyping, software development, artificial intelligence">
+    <meta name="keywords" content="AI engineering, AI engineer, AI consulting, AI development, RAG systems, AI agents, LLM, ChatGPT integration, GPT-4, Claude AI, machine learning, NLP, natural language processing, AI automation, AI chatbot, OpenAI integration, custom LLM, enterprise AI, AI MVP, multiplatform apps, cross-platform development, serverless cloud, rapid prototyping, software development, artificial intelligence, AI strategy, AI architecture, AI solutions, hire AI engineer, AI development company">
     <meta name="author" content="fullai.dev">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href={siteUrl}>
+
+    <!-- Language Alternates -->
+    <link rel="alternate" hreflang="en" href={siteUrl}>
+    <link rel="alternate" hreflang="es" href={siteUrl}>
+    <link rel="alternate" hreflang="x-default" href={siteUrl}>
 
     <!-- Theme Color -->
     <meta name="theme-color" content="#0a0e17">
@@ -72,13 +77,18 @@ const twitterHandle = "@fullaidev";
                 "@type": "Organization",
                 "@id": "https://fullai.dev/#organization",
                 "name": "fullai.dev",
+                "alternateName": "Full AI Dev",
                 "url": "https://fullai.dev",
                 "logo": {
                     "@type": "ImageObject",
-                    "url": "https://fullai.dev/logo.png"
+                    "url": "https://fullai.dev/logo.png",
+                    "width": 800,
+                    "height": 800
                 },
-                "description": "AI Strategy & Software Development consultancy specializing in AI agents, RAG systems, multiplatform apps, and serverless cloud solutions.",
+                "image": "https://fullai.dev/og-image.png",
+                "description": "AI Engineering & Software Development consultancy specializing in AI agents, RAG systems, LLM integration, ChatGPT solutions, multiplatform apps, and serverless cloud infrastructure.",
                 "email": "hello@fullai.dev",
+                "knowsAbout": ["Artificial Intelligence", "Machine Learning", "Natural Language Processing", "RAG Systems", "AI Agents", "LLM Integration", "ChatGPT", "GPT-4", "Claude AI", "Software Development", "Cross-Platform Development", "Serverless Architecture"],
                 "sameAs": []
             },
             {
@@ -86,22 +96,85 @@ const twitterHandle = "@fullaidev";
                 "@id": "https://fullai.dev/#website",
                 "url": "https://fullai.dev",
                 "name": "fullai.dev",
-                "description": "Your Digital Backbone - AI Strategy & Software Development",
+                "description": "Your Digital Backbone - AI Engineering & Software Development",
                 "publisher": {
                     "@id": "https://fullai.dev/#organization"
-                }
+                },
+                "inLanguage": ["en", "es"]
             },
             {
                 "@type": "ProfessionalService",
                 "@id": "https://fullai.dev/#service",
-                "name": "fullai.dev",
+                "name": "fullai.dev - AI Engineering Services",
                 "url": "https://fullai.dev",
-                "description": "Transform your business with AI-powered apps, RAG systems, and multiplatform solutions.",
+                "description": "Transform your business with AI-powered apps, RAG systems, custom AI agents, and multiplatform solutions. Expert AI engineers delivering from idea to production.",
                 "provider": {
                     "@id": "https://fullai.dev/#organization"
                 },
-                "serviceType": ["AI Consulting", "Software Development", "AI Agents", "RAG Systems", "Multiplatform Apps", "Cloud Infrastructure"],
-                "areaServed": "Worldwide"
+                "serviceType": [
+                    "AI Engineering",
+                    "AI Consulting",
+                    "AI Strategy",
+                    "Custom AI Development",
+                    "AI Agent Development",
+                    "RAG System Development",
+                    "LLM Integration",
+                    "ChatGPT Integration",
+                    "GPT-4 Integration",
+                    "Claude AI Integration",
+                    "Machine Learning Solutions",
+                    "NLP Development",
+                    "AI Chatbot Development",
+                    "Enterprise AI Solutions",
+                    "AI MVP Development",
+                    "Rapid Prototyping",
+                    "Multiplatform App Development",
+                    "Cross-Platform Development",
+                    "Serverless Cloud Infrastructure",
+                    "Software Development"
+                ],
+                "areaServed": {
+                    "@type": "Place",
+                    "name": "Worldwide"
+                },
+                "hasOfferCatalog": {
+                    "@type": "OfferCatalog",
+                    "name": "AI Engineering Services",
+                    "itemListElement": [
+                        {
+                            "@type": "Offer",
+                            "itemOffered": {
+                                "@type": "Service",
+                                "name": "AI Strategy & Architecture",
+                                "description": "Strategic AI planning, system design, and technical architecture for enterprise AI solutions"
+                            }
+                        },
+                        {
+                            "@type": "Offer",
+                            "itemOffered": {
+                                "@type": "Service",
+                                "name": "Custom AI Development",
+                                "description": "Build custom AI agents, RAG systems, and LLM-powered applications tailored to your business"
+                            }
+                        },
+                        {
+                            "@type": "Offer",
+                            "itemOffered": {
+                                "@type": "Service",
+                                "name": "Rapid Prototyping",
+                                "description": "Fast AI MVP development to validate ideas and get to market quickly"
+                            }
+                        },
+                        {
+                            "@type": "Offer",
+                            "itemOffered": {
+                                "@type": "Service",
+                                "name": "Integration & Deployment",
+                                "description": "Seamless integration of AI solutions with existing systems and cloud deployment"
+                            }
+                        }
+                    ]
+                }
             }
         ]
     }
