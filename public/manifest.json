@@ -1,0 +1,20 @@
+{
+  "name": "fullai.dev - AI Strategy & Software Development",
+  "short_name": "fullai.dev",
+  "description": "Transform your business with AI-powered apps, RAG systems, and multiplatform solutions.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0e17",
+  "theme_color": "#00ffa3",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/logo.png",
+      "sizes": "800x800",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["business", "technology"],
+  "lang": "en"
+}

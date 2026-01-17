@@ -26,9 +26,15 @@ const twitterHandle = "@fullaidev";
     <meta name="robots" content="index, follow">
     <link rel="canonical" href={siteUrl}>
 
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#0a0e17">
+    <meta name="msapplication-TileColor" content="#0a0e17">
+    <meta name="color-scheme" content="dark">
+
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="/icon-color.png">
-    <link rel="apple-touch-icon" href="/icon-color.png">
+    <link rel="icon" type="image/png" href="/logo.png">
+    <link rel="apple-touch-icon" href="/logo.png">
+    <link rel="manifest" href="/manifest.json">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
@@ -36,6 +42,9 @@ const twitterHandle = "@fullaidev";
     <meta property="og:title" content={siteTitle}>
     <meta property="og:description" content={siteDescription}>
     <meta property="og:image" content={siteImage}>
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="fullai.dev - Your Digital Backbone">
     <meta property="og:site_name" content={siteName}>
     <meta property="og:locale" content="en_US">
 
@@ -45,6 +54,7 @@ const twitterHandle = "@fullaidev";
     <meta name="twitter:title" content={siteTitle}>
     <meta name="twitter:description" content={siteDescription}>
     <meta name="twitter:image" content={siteImage}>
+    <meta name="twitter:image:alt" content="fullai.dev - Your Digital Backbone">
     <meta name="twitter:site" content={twitterHandle}>
 
     <!-- Fonts -->
@@ -53,7 +63,7 @@ const twitterHandle = "@fullaidev";
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 
     <!-- JSON-LD Structured Data -->
-    <script type="application/ld+json">
+    <script is:inline type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@graph": [
@@ -64,7 +74,7 @@ const twitterHandle = "@fullaidev";
                 "url": "https://fullai.dev",
                 "logo": {
                     "@type": "ImageObject",
-                    "url": "https://fullai.dev/icon-color.png"
+                    "url": "https://fullai.dev/logo.png"
                 },
                 "description": "AI Strategy & Software Development consultancy specializing in AI agents, RAG systems, multiplatform apps, and serverless cloud solutions.",
                 "email": "hello@fullai.dev",
@@ -97,12 +107,15 @@ const twitterHandle = "@fullaidev";
     </script>
 </head>
 <body>
+    <!-- Skip Link for Accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
     <!-- Navigation -->
-    <nav class="nav">
+    <nav class="nav" role="navigation" aria-label="Main navigation">
         <div class="nav-container">
             <a href="/" class="logo" aria-label="fullai.dev Home">
                 <div class="logo-group">
-                    <img src="/icon-color.png" alt="fullai.dev" class="logo-img">
+                    <img src="/logo.png" alt="fullai.dev" class="logo-img">
                     <span class="logo-text">fullai<span class="dot">.</span>dev</span>
                 </div>
             </a>
@@ -118,8 +131,9 @@ const twitterHandle = "@fullaidev";
         </div>
     </nav>
 
+    <main id="main-content">
     <!-- Hero Section -->
-    <section class="hero">
+    <section class="hero" aria-labelledby="hero-title">
         <div class="hero-background">
             <div class="grid-overlay"></div>
             <div class="gradient-orb orb-1"></div>
@@ -129,7 +143,7 @@ const twitterHandle = "@fullaidev";
         <div class="hero-container">
             <div class="hero-content">
                 <div class="hero-badge" data-en="AI Strategy & Software Development" data-es="Estrategia + IA + Software">AI Strategy & Software Development</div>
-                <h1 class="hero-title">
+                <h1 id="hero-title" class="hero-title">
                     <span class="title-line" data-en="Your" data-es="Tu">Your</span>
                     <span class="title-line highlight" data-en="Digital" data-es="Columna">Digital</span>
                     <span class="title-line highlight" data-en="Backbone" data-es="Digital">Backbone</span>
@@ -144,10 +158,10 @@ const twitterHandle = "@fullaidev";
                 </div>
             </div>
             <div class="hero-visual">
-                <div class="floating-cards">
+                <div class="floating-cards" aria-hidden="true">
                     <div class="float-card card-1">
                         <div class="card-icon">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                                 <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                 <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                 <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -157,7 +171,7 @@ const twitterHandle = "@fullaidev";
                     </div>
                     <div class="float-card card-2">
                         <div class="card-icon accent">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                                 <rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2"/>
                                 <path d="M9 9L15 15M15 9L9 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
                             </svg>
@@ -166,7 +180,7 @@ const twitterHandle = "@fullaidev";
                     </div>
                     <div class="float-card card-3">
                         <div class="card-icon">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                                 <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
                         </div>
@@ -395,18 +409,19 @@ const twitterHandle = "@fullaidev";
             </div>
         </div>
     </section>
+    </main>
 
     <!-- Mobile Bottom Navigation -->
-    <nav class="bottom-nav">
-        <a href="#" class="bottom-nav-item">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+    <nav class="bottom-nav" role="navigation" aria-label="Mobile navigation">
+        <a href="#" class="bottom-nav-item" aria-label="Home">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                 <path d="M3 9L12 2L21 9V20C21 20.5304 20.7893 21.0391 20.4142 21.4142C20.0391 21.7893 19.5304 22 19 22H5C4.46957 22 3.96086 21.7893 3.58579 21.4142C3.21071 21.0391 3 20.5304 3 20V9Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 <path d="M9 22V12H15V22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
             <span data-en="Home" data-es="Inicio">Home</span>
         </a>
-        <a href="#services" class="bottom-nav-item">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+        <a href="#services" class="bottom-nav-item" aria-label="Services">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                 <rect x="3" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/>
                 <rect x="14" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/>
                 <rect x="3" y="14" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/>
@@ -414,16 +429,16 @@ const twitterHandle = "@fullaidev";
             </svg>
             <span data-en="Services" data-es="Servicios">Services</span>
         </a>
-        <a href="#approach" class="bottom-nav-item">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+        <a href="#approach" class="bottom-nav-item" aria-label="Approach">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                 <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
             <span data-en="Approach" data-es="Enfoque">Approach</span>
         </a>
-        <a href="#contact" class="bottom-nav-item">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+        <a href="#contact" class="bottom-nav-item" aria-label="Contact">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                 <path d="M22 16.92V19.92C22 20.48 21.56 20.96 21 21C14.56 21.5 8.5 18.5 4.64 13.36C1.5 9.5 0.5 6.44 1 3C1.04 2.44 1.52 2 2.08 2H5.08C5.58 2 6 2.36 6.08 2.85C6.22 3.85 6.48 4.81 6.85 5.74C7 6.08 6.92 6.48 6.65 6.74L5.35 8.04C6.62 10.38 8.61 12.38 10.96 13.65L12.26 12.35C12.52 12.08 12.92 12 13.26 12.15C14.19 12.52 15.16 12.78 16.15 12.92C16.65 13 17 13.42 17 13.92V16.92C17 17.48 16.52 17.96 15.96 18C15.64 18.02 15.32 18.02 15 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
             <span data-en="Contact" data-es="Contacto">Contact</span>
@@ -436,7 +451,7 @@ const twitterHandle = "@fullaidev";
             <div class="footer-content">
                 <div class="footer-brand">
                     <div class="logo-group">
-                        <img src="/icon-color.png" alt="fullai.dev" class="logo-img-small">
+                        <img src="/logo.png" alt="fullai.dev" class="logo-img-small">
                         <span class="logo-text-small">fullai<span class="dot">.</span>dev</span>
                     </div>
                     <p class="footer-tagline" data-en="Intelligent Systems" data-es="Sistemas Inteligentes">Intelligent Systems</p>
@@ -452,7 +467,7 @@ const twitterHandle = "@fullaidev";
                         <h4 data-en="Company" data-es="Empresa">Company</h4>
                         <a href="#approach" data-en="Approach" data-es="Enfoque">Approach</a>
                         <a href="#contact" data-en="Contact" data-es="Contacto">Contact</a>
-                        <a href="#" data-en="Careers" data-es="Carreras">Careers</a>
+                        <a href="mailto:hello@fullai.dev" data-en="Careers" data-es="Carreras">Careers</a>
                     </div>
                 </div>
             </div>
@@ -494,6 +509,70 @@ const twitterHandle = "@fullaidev";
             line-height: 1.6;
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
+        }
+
+        /* Skip Link for Accessibility */
+        .skip-link {
+            position: absolute;
+            top: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--color-primary);
+            color: var(--color-bg);
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            z-index: 9999;
+            transition: top 0.3s var(--ease-smooth);
+        }
+
+        .skip-link:focus {
+            top: 1rem;
+            outline: 3px solid var(--color-accent);
+            outline-offset: 2px;
+        }
+
+        /* Focus Visible Styles */
+        *:focus {
+            outline: none;
+        }
+
+        *:focus-visible {
+            outline: 2px solid var(--color-primary);
+            outline-offset: 3px;
+        }
+
+        a:focus-visible,
+        button:focus-visible {
+            outline: 2px solid var(--color-primary);
+            outline-offset: 3px;
+            border-radius: 4px;
+        }
+
+        .btn:focus-visible {
+            outline: 3px solid var(--color-accent);
+            outline-offset: 3px;
+        }
+
+        /* Reduced Motion */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+
+            .gradient-orb,
+            .grid-overlay,
+            .float-card,
+            .glow-ring,
+            .logo-img {
+                animation: none !important;
+            }
         }
 
         .container {
