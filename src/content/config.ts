@@ -11,6 +11,7 @@ const blog = defineCollection({
     lang: z.enum(['en', 'es']),
     image: z.string().optional(),
     draft: z.boolean().default(false),
+    translationSlug: z.string().optional(),
   }),
 });
 

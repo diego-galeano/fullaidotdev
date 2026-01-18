@@ -5,6 +5,7 @@ pubDate: 2025-01-15
 author: "fullai.dev"
 tags: ["Agentes IA", "IA Empresarial", "Estrategia"]
 lang: "es"
+translationSlug: "the-rise-of-ai-agents-in-enterprise"
 ---
 
 El panorama empresarial está cambiando. Mientras que los chatbots y la automatización básica han existido por años, está emergiendo un nuevo paradigma: **los agentes de IA**. Estos no son simplemente herramientas que responden a comandos, son sistemas autónomos capaces de razonar, planificar y ejecutar tareas complejas.

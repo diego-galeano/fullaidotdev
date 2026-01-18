@@ -3,12 +3,21 @@ import Navigation from '../components/Navigation.astro';
 import Footer from '../components/Footer.astro';
 import MobileBottomNav from '../components/MobileBottomNav.astro';
 
+interface ArticleMeta {
+    publishedTime: string;
+    author: string;
+    tags: string[];
+}
+
 interface Props {
     title: string;
     description: string;
     currentPage?: string;
     ogImage?: string;
     noIndex?: boolean;
+    ogType?: 'website' | 'article';
+    articleMeta?: ArticleMeta;
+    lang?: string;
 }
 
 const {
@@ -16,7 +25,10 @@ const {
     description,
     currentPage = 'home',
     ogImage = '/og-image.png',
-    noIndex = false
+    noIndex = false,
+    ogType = 'website',
+    articleMeta,
+    lang = 'en'
 } = Astro.props;
 
 const siteUrl = "https://fullai.dev";
@@ -24,7 +36,7 @@ const canonicalUrl = new URL(Astro.url.pathname, siteUrl).toString();
 ---
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang={lang}>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -53,12 +65,21 @@ const canonicalUrl = new URL(Astro.url.pathname, siteUrl).toString();
     <link rel="manifest" href="/manifest.json">
 
     <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
+    <meta property="og:type" content={ogType}>
     <meta property="og:url" content={canonicalUrl}>
     <meta property="og:title" content={title}>
     <meta property="og:description" content={description}>
     <meta property="og:image" content={`${siteUrl}${ogImage}`}>
     <meta property="og:site_name" content="fullai.dev">
+    {ogType === 'article' && articleMeta && (
+        <>
+            <meta property="article:published_time" content={articleMeta.publishedTime} />
+            <meta property="article:author" content={articleMeta.author} />
+            {articleMeta.tags.map(tag => (
+                <meta property="article:tag" content={tag} />
+            ))}
+        </>
+    )}
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">

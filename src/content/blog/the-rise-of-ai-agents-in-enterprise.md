@@ -5,6 +5,7 @@ pubDate: 2025-01-15
 author: "fullai.dev"
 tags: ["AI Agents", "Enterprise AI", "Strategy"]
 lang: "en"
+translationSlug: "el-auge-de-los-agentes-ia-en-empresas"
 ---
 
 The enterprise landscape is shifting. While chatbots and basic automation have been around for years, a new paradigm is emerging: **AI agents**. These aren't just tools that respond to commands—they're autonomous systems capable of reasoning, planning, and executing complex tasks.
