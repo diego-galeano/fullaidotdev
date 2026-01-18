@@ -408,7 +408,7 @@ function formatDate(date: Date, lang: string = 'en'): string {
             isEnglish = toEnglish;
             localStorage.setItem('lang', isEnglish ? 'en' : 'es');
 
-            if (currentFlag) currentFlag.textContent = isEnglish ? '🇺🇸' : '🇪🇸';
+            if (currentFlag) currentFlag.textContent = isEnglish ? '🇺🇸' : '🇦🇷';
             if (currentLang) currentLang.textContent = isEnglish ? 'EN' : 'ES';
 
             document.querySelectorAll('[data-en][data-es]').forEach(el => {
