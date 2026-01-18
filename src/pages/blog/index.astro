@@ -3,9 +3,24 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import GradientOrbs from '../../components/GradientOrbs.astro';
 import BlogCard from '../../components/BlogCard.astro';
+import { calculateReadingTime } from '../../utils/blog';
 
 const allPosts = await getCollection('blog', ({ data }) => !data.draft);
 const sortedPosts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+// Collect all unique tags (grouped by language)
+const englishTags = new Set<string>();
+const spanishTags = new Set<string>();
+
+sortedPosts.forEach(post => {
+    post.data.tags.forEach(tag => {
+        if (post.data.lang === 'en') {
+            englishTags.add(tag);
+        } else {
+            spanishTags.add(tag);
+        }
+    });
+});
 
 const pageTitle = "Blog | fullai.dev";
 const pageDescription = "Insights on AI strategy, engineering, and software development from the fullai.dev team.";
@@ -20,6 +35,26 @@ const pageDescription = "Insights on AI strategy, engineering, and software deve
         </div>
     </section>
 
+    <section class="blog-filters">
+        <div class="container">
+            <div class="tag-filters" id="tagFilters">
+                <button class="tag-filter active" data-tag="all">
+                    <span data-en="All" data-es="Todos">All</span>
+                </button>
+                {Array.from(englishTags).map(tag => (
+                    <button class="tag-filter" data-tag={tag} data-lang="en">
+                        {tag}
+                    </button>
+                ))}
+                {Array.from(spanishTags).map(tag => (
+                    <button class="tag-filter" data-tag={tag} data-lang="es">
+                        {tag}
+                    </button>
+                ))}
+            </div>
+        </div>
+    </section>
+
     <section class="blog-grid-section">
         <div class="container">
             {sortedPosts.length === 0 ? (
@@ -27,19 +62,25 @@ const pageDescription = "Insights on AI strategy, engineering, and software deve
                     <p data-en="No posts yet. Check back soon!" data-es="Aún no hay publicaciones. ¡Vuelve pronto!">No posts yet. Check back soon!</p>
                 </div>
             ) : (
-                <div class="blog-grid">
+                <div class="blog-grid" id="blogGrid">
                     {sortedPosts.map((post) => (
-                        <BlogCard
-                            title={post.data.title}
-                            description={post.data.description}
-                            slug={post.slug}
-                            pubDate={post.data.pubDate}
-                            lang={post.data.lang}
-                            tags={post.data.tags}
-                        />
+                        <div class="blog-card-wrapper" data-lang={post.data.lang} data-tags={post.data.tags.join(',')}>
+                            <BlogCard
+                                title={post.data.title}
+                                description={post.data.description}
+                                slug={post.slug}
+                                pubDate={post.data.pubDate}
+                                lang={post.data.lang}
+                                tags={post.data.tags}
+                                readingTime={calculateReadingTime(post.body)}
+                            />
+                        </div>
                     ))}
                 </div>
             )}
+            <div class="no-results hidden" id="noResults">
+                <p data-en="No posts found with this filter." data-es="No se encontraron publicaciones con este filtro.">No posts found with this filter.</p>
+            </div>
         </div>
     </section>
 </BaseLayout>
@@ -47,7 +88,7 @@ const pageDescription = "Insights on AI strategy, engineering, and software deve
 <style>
     .blog-header {
         position: relative;
-        padding: 10rem 0 4rem;
+        padding: 10rem 0 3rem;
         text-align: center;
         overflow: hidden;
     }
@@ -70,8 +111,48 @@ const pageDescription = "Insights on AI strategy, engineering, and software deve
         margin: 0 auto;
     }
 
+    /* Tag Filters */
+    .blog-filters {
+        padding: 2rem 0;
+    }
+
+    .tag-filters {
+        display: flex;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .tag-filter {
+        background: var(--color-surface);
+        border: 1px solid var(--color-border);
+        color: var(--color-text-dim);
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-family: var(--font-mono);
+        cursor: pointer;
+        transition: all 0.3s var(--ease-smooth);
+    }
+
+    .tag-filter:hover {
+        border-color: var(--color-primary);
+        color: var(--color-text);
+    }
+
+    .tag-filter.active {
+        background: var(--color-primary);
+        border-color: var(--color-primary);
+        color: var(--color-bg);
+        font-weight: 500;
+    }
+
+    .tag-filter.hidden {
+        display: none;
+    }
+
     .blog-grid-section {
-        padding: 4rem 0 6rem;
+        padding: 2rem 0 6rem;
     }
 
     .blog-grid {
@@ -80,15 +161,24 @@ const pageDescription = "Insights on AI strategy, engineering, and software deve
         gap: 2rem;
     }
 
-    .no-posts {
+    .blog-card-wrapper.hidden {
+        display: none;
+    }
+
+    .no-posts,
+    .no-results {
         text-align: center;
         padding: 4rem 2rem;
         color: var(--color-text-dim);
     }
 
+    .no-results.hidden {
+        display: none;
+    }
+
     @media (max-width: 768px) {
         .blog-header {
-            padding: 8rem 0 3rem;
+            padding: 8rem 0 2rem;
         }
 
         .blog-title {
@@ -98,33 +188,111 @@ const pageDescription = "Insights on AI strategy, engineering, and software deve
         .blog-grid {
             grid-template-columns: 1fr;
         }
+
+        .tag-filters {
+            justify-content: flex-start;
+            padding: 0 0.5rem;
+        }
+
+        .tag-filter {
+            font-size: 0.8rem;
+            padding: 0.4rem 0.8rem;
+        }
     }
 </style>
 
 <script>
-    // Filter blog cards by language when language changes
-    const blogCards = document.querySelectorAll('.blog-card');
+    const blogCards = document.querySelectorAll('.blog-card-wrapper');
+    const tagFilters = document.querySelectorAll('.tag-filter');
+    const noResults = document.getElementById('noResults');
+    const langSwitch = document.getElementById('langSwitch');
 
-    function filterBlogCards(lang: string) {
-        blogCards.forEach(card => {
-            const cardLang = card.getAttribute('data-lang');
-            if (cardLang === lang) {
-                card.classList.remove('hidden');
+    let currentLang = localStorage.getItem('lang') !== 'es' ? 'en' : 'es';
+    let currentTag = 'all';
+
+    function updateTagFiltersVisibility() {
+        tagFilters.forEach(filter => {
+            const filterLang = filter.getAttribute('data-lang');
+            const tag = filter.getAttribute('data-tag');
+
+            // "All" button is always visible
+            if (tag === 'all') {
+                filter.classList.remove('hidden');
+                return;
+            }
+
+            // Show only tags for the current language
+            if (filterLang === currentLang) {
+                filter.classList.remove('hidden');
             } else {
-                card.classList.add('hidden');
+                filter.classList.add('hidden');
+                // If the hidden tag was active, reset to "all"
+                if (filter.classList.contains('active')) {
+                    filter.classList.remove('active');
+                    document.querySelector('.tag-filter[data-tag="all"]')?.classList.add('active');
+                    currentTag = 'all';
+                }
             }
         });
     }
 
-    // Listen for language changes (from BaseLayout's language switcher)
-    const langSwitch = document.getElementById('langSwitch');
-    let isEnglish = localStorage.getItem('lang') !== 'es';
+    function filterBlogCards() {
+        let visibleCount = 0;
 
-    // Initial filter
-    filterBlogCards(isEnglish ? 'en' : 'es');
+        blogCards.forEach(card => {
+            const cardLang = card.getAttribute('data-lang');
+            const cardTags = card.getAttribute('data-tags')?.split(',') || [];
 
-    langSwitch?.addEventListener('click', () => {
-        isEnglish = !isEnglish;
-        filterBlogCards(isEnglish ? 'en' : 'es');
+            const matchesLang = cardLang === currentLang;
+            const matchesTag = currentTag === 'all' || cardTags.includes(currentTag);
+
+            if (matchesLang && matchesTag) {
+                card.classList.remove('hidden');
+                visibleCount++;
+            } else {
+                card.classList.add('hidden');
+            }
+        });
+
+        // Show/hide no results message
+        if (noResults) {
+            if (visibleCount === 0) {
+                noResults.classList.remove('hidden');
+            } else {
+                noResults.classList.add('hidden');
+            }
+        }
+    }
+
+    // Tag filter click handlers
+    tagFilters.forEach(filter => {
+        filter.addEventListener('click', () => {
+            const tag = filter.getAttribute('data-tag');
+            if (!tag) return;
+
+            // Update active state
+            tagFilters.forEach(f => f.classList.remove('active'));
+            filter.classList.add('active');
+
+            currentTag = tag;
+            filterBlogCards();
+        });
     });
+
+    // Language switch handler
+    langSwitch?.addEventListener('click', () => {
+        currentLang = currentLang === 'en' ? 'es' : 'en';
+        currentTag = 'all'; // Reset tag filter on language change
+
+        // Reset active tag to "all"
+        tagFilters.forEach(f => f.classList.remove('active'));
+        document.querySelector('.tag-filter[data-tag="all"]')?.classList.add('active');
+
+        updateTagFiltersVisibility();
+        filterBlogCards();
+    });
+
+    // Initial setup
+    updateTagFiltersVisibility();
+    filterBlogCards();
 </script>

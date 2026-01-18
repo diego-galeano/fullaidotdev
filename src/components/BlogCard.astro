@@ -1,4 +1,6 @@
 ---
+import { formatReadingTime } from '../utils/blog';
+
 interface Props {
     title: string;
     description: string;
@@ -6,15 +8,16 @@ interface Props {
     pubDate: Date;
     lang: 'en' | 'es';
     tags: string[];
+    readingTime: number;
     variant?: 'default' | 'preview';
 }
 
-const { title, description, slug, pubDate, lang, tags, variant = 'default' } = Astro.props;
+const { title, description, slug, pubDate, lang, tags, readingTime, variant = 'default' } = Astro.props;
 
 function formatDate(date: Date, language: string = 'en'): string {
     return date.toLocaleDateString(language === 'es' ? 'es-ES' : 'en-US', {
         year: 'numeric',
-        month: variant === 'preview' ? 'short' : 'long',
+        month: 'short',
         day: 'numeric'
     });
 }
@@ -26,9 +29,13 @@ const maxTags = variant === 'preview' ? 2 : 3;
     <div class="blog-card-inner">
         <div class="blog-card-header">
             <span class="blog-lang-badge">{lang.toUpperCase()}</span>
-            <time datetime={pubDate.toISOString()}>
-                {formatDate(pubDate, lang)}
-            </time>
+            <div class="blog-card-meta">
+                <time datetime={pubDate.toISOString()}>
+                    {formatDate(pubDate, lang)}
+                </time>
+                <span class="meta-dot">•</span>
+                <span class="reading-time">{formatReadingTime(readingTime, lang)}</span>
+            </div>
         </div>
         <h3 class="blog-card-title">
             <a href={`/blog/${slug}`}>{title}</a>
@@ -109,9 +116,20 @@ const maxTags = variant === 'preview' ? 2 : 3;
         letter-spacing: 0.05em;
     }
 
-    .blog-card-header time {
+    .blog-card-meta {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
         color: var(--color-text-dim);
         font-size: 0.8rem;
+    }
+
+    .meta-dot {
+        opacity: 0.5;
+    }
+
+    .reading-time {
+        color: var(--color-text-dim);
     }
 
     .blog-card-title {
