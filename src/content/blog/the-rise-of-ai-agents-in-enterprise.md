@@ -26,7 +26,7 @@ The business case is compelling:
 
 1. **Cost Reduction**: Agents can handle tasks that previously required multiple human hours
 2. **Scalability**: Unlike human teams, agents can be replicated instantly
-3. **24/7 Availability**: They work around the clock without fatigue
+3. **24/7 Availability**: Your team's reach extends across every time zone—agents handle routine tasks around the clock, so your people can focus on high-impact work during their best hours
 
 But perhaps most importantly, AI agents free up your human talent to focus on creative, strategic work that machines can't replicate.
 
